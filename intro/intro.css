@@ -1,0 +1,584 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050505;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* =========================================
+   ESCENA
+========================================= */
+
+#intro {
+    width: 100%;
+    height: 100%;
+}
+
+.intro-scene {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #151515 0%,
+            #090909 45%,
+            #020202 100%
+        );
+
+    animation: sceneAppear 1.2s ease forwards;
+}
+
+
+/* =========================================
+   BRILLO CENTRAL
+========================================= */
+
+.intro-scene::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.08),
+            transparent 70%
+        );
+
+    filter: blur(25px);
+
+    animation:
+        glowPulse 4s ease-in-out infinite;
+
+}
+
+
+/* =========================================
+   PARTICULAS
+========================================= */
+
+.particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.particle {
+
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: 0;
+
+    animation:
+        particleFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo-container {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    transform:
+        translateY(35px)
+        scale(0.92);
+
+    animation:
+        logoReveal
+        1.4s
+        cubic-bezier(.16,1,.3,1)
+        0.5s
+        forwards;
+}
+
+
+/* =========================================
+   ICONO
+========================================= */
+
+.logo-mark {
+
+    position: relative;
+
+    width: 115px;
+    height: 90px;
+
+    margin-bottom: 28px;
+
+    transform:
+        scale(0.7)
+        rotate(-4deg);
+
+    opacity: 0;
+
+    animation:
+        markReveal
+        1.3s
+        cubic-bezier(.16,1,.3,1)
+        0.2s
+        forwards;
+}
+
+
+/* LIBRO */
+
+.logo-book {
+
+    position: absolute;
+
+    bottom: 8px;
+
+    width: 52px;
+    height: 62px;
+
+    border: 4px solid white;
+
+    background: #080808;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,0.12);
+
+}
+
+
+.logo-book.left {
+
+    left: 7px;
+
+    border-radius:
+        8px
+        3px
+        3px
+        8px;
+
+    transform:
+        skewY(-8deg)
+        rotate(-3deg);
+}
+
+
+.logo-book.right {
+
+    right: 7px;
+
+    border-radius:
+        3px
+        8px
+        8px
+        3px;
+
+    transform:
+        skewY(8deg)
+        rotate(3deg);
+}
+
+
+/* LÍNEA CENTRAL DEL LIBRO */
+
+.logo-mark::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 10px;
+
+    width: 4px;
+    height: 58px;
+
+    background: white;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   LAPIZ
+========================================= */
+
+.logo-pencil {
+
+    position: absolute;
+
+    width: 76px;
+    height: 13px;
+
+    background: white;
+
+    border-radius: 5px;
+
+    top: 13px;
+    right: -2px;
+
+    transform:
+        rotate(-42deg);
+
+    box-shadow:
+        0 0 20px
+        rgba(255,255,255,0.25);
+
+}
+
+
+.logo-pencil::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -14px;
+    top: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 6.5px solid transparent;
+    border-bottom: 6.5px solid transparent;
+    border-right: 14px solid white;
+}
+
+
+.logo-pencil::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 7px;
+    top: 0;
+
+    width: 7px;
+    height: 13px;
+
+    background: #999;
+
+    border-radius: 2px;
+}
+
+
+/* =========================================
+   TEXTO
+========================================= */
+
+.logo-text {
+
+    color: white;
+
+    font-size: 64px;
+
+    font-weight: 600;
+
+    letter-spacing: -3px;
+
+    line-height: 1;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    animation:
+        textReveal
+        1s
+        cubic-bezier(.16,1,.3,1)
+        0.9s
+        forwards;
+}
+
+
+.logo-text strong {
+
+    font-weight: 800;
+
+    margin-left: 2px;
+
+}
+
+
+/* =========================================
+   FRASE
+========================================= */
+
+.tagline {
+
+    margin-top: 18px;
+
+    color: rgba(255,255,255,0.55);
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    transform: translateY(12px);
+
+    animation:
+        taglineReveal
+        1s
+        ease
+        1.5s
+        forwards;
+}
+
+
+/* =========================================
+   LINEA
+========================================= */
+
+.intro-line {
+
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 0;
+    height: 2px;
+
+    background: white;
+
+    transform: translateX(-50%);
+
+    animation:
+        lineReveal
+        1.5s
+        cubic-bezier(.16,1,.3,1)
+        1.8s
+        forwards;
+}
+
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+
+@keyframes sceneAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+
+@keyframes logoReveal {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes markReveal {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+@keyframes textReveal {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes taglineReveal {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes lineReveal {
+
+    to {
+        width: 100%;
+    }
+}
+
+
+@keyframes particleFloat {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.5);
+    }
+
+    30% {
+
+        opacity: 0.5;
+    }
+
+    70% {
+
+        opacity: 0.2;
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-80px)
+            scale(1);
+    }
+}
+
+
+/* =========================================
+   FINAL
+========================================= */
+
+.intro-finished {
+
+    animation:
+        introExit
+        1s
+        ease
+        forwards;
+}
+
+
+@keyframes introExit {
+
+    to {
+
+        opacity: 0;
+
+        transform:
+            scale(1.04);
+    }
+}
+
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 600px) {
+
+    .logo-text {
+        font-size: 46px;
+    }
+
+    .tagline {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .logo-mark {
+        transform:
+            scale(0.8);
+    }
+}

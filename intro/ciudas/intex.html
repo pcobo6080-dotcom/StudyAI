@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MEGACITY 3D</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div id="hud">
+
+        <div class="brand">
+            <div class="brand-title">MEGACITY</div>
+            <div class="brand-subtitle">3D CITY SIMULATION</div>
+        </div>
+
+        <div class="top-buttons">
+
+            <button id="dayButton">
+                ☀️ DÍA
+            </button>
+
+            <button id="nightButton">
+                🌙 NOCHE
+            </button>
+
+            <button id="cinematicButton">
+                🎬 CINEMÁTICA
+            </button>
+
+            <button id="resetButton">
+                ⟳ REINICIAR
+            </button>
+
+        </div>
+
+        <div class="city-info">
+
+            <div class="info-title">
+                MEGA CITY
+            </div>
+
+            <div>
+                <span id="population">0</span> habitantes
+            </div>
+
+            <div>
+                <span id="cars">0</span> vehículos
+            </div>
+
+            <div>
+                <span id="buildings">0</span> edificios
+            </div>
+
+        </div>
+
+        <div class="help">
+
+            <strong>CONTROLES</strong>
+
+            <br>
+
+            🖱️ Arrastra para mover la cámara
+            <br>
+
+            🔍 Rueda para acercar/alejar
+            <br>
+
+            🏙️ Explora toda la ciudad
+
+        </div>
+
+    </div>
+
+    <div id="cinematicPanel">
+
+        <div class="cinematic-title">
+            RECORRIDO CINEMATOGRÁFICO
+        </div>
+
+        <div id="cinematicText">
+            Preparando recorrido...
+        </div>
+
+    </div>
+
+    <script type="module" src="./main.js"></script>
+
+</body>
+
+</html>

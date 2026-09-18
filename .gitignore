@@ -1,0 +1,26 @@
+node_modules/
+
+# Secretos
+server/.env
+
+# Bases de datos
+*.db
+*.db-shm
+*.db-wal
+
+# Archivos temporales
+.DS_Store
+*.log
+
+# Copias de seguridad
+backup/
+*.backup
+*.backup-*
+*.save
+# Copias de seguridad
+*backup*
+*.save
+
+server/*backup*
+server/*.save
+server/server.before-database.js
