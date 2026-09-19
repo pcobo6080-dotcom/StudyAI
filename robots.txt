@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://studyai-1-v9jt.onrender.com/sitemap.xml
