@@ -374,7 +374,13 @@
                 >
                     📚 Biblioteca
                 </button>
-
+<button
+    type="button"
+    class="home-button"
+    onclick="abrirGeneradorVideo()"
+>
+    🎬 Generador de Vídeos
+</button>
 
             </nav>
 
@@ -1597,7 +1603,501 @@
 
         </section>
 
+<!-- =====================================================
+     GENERADOR DE VÍDEOS 3D
+     ===================================================== -->
 
+<section
+    id="generador-video-screen"
+    class="generador-video-screen oculto"
+>
+
+    <div class="generador-video-header">
+
+        <div>
+
+            <button
+                type="button"
+                class="modo-estudio-volver"
+                onclick="cerrarGeneradorVideo()"
+            >
+                ← Volver
+            </button>
+
+            <div class="generador-video-titulo">
+
+                <div class="generador-video-icono">
+                    ▶
+                </div>
+
+                <div>
+
+                    <h1>
+                        Generador de Vídeos
+                    </h1>
+
+                    <p>
+                        Crea vídeos 3D cinematográficos a partir de una descripción.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="generador-video-estado">
+
+            <span></span>
+
+            Motor preparado
+
+        </div>
+
+    </div>
+
+
+
+    <div class="generador-video-layout">
+
+
+        <!-- =================================================
+             PANEL DE CREACIÓN
+             ================================================= -->
+
+        <aside class="generador-video-panel">
+
+
+            <div class="generador-video-panel-titulo">
+
+                <strong>
+                    Crear vídeo
+                </strong>
+
+                <small>
+                    Describe exactamente lo que quieres ver.
+                </small>
+
+            </div>
+
+
+            <!-- PROMPT -->
+
+            <label
+                for="video-prompt"
+                class="generador-video-label"
+            >
+                Descripción
+            </label>
+
+
+            <textarea
+                id="video-prompt"
+                class="generador-video-prompt"
+                placeholder="Ejemplo: Un tren atraviesa una ciudad nevada durante la noche. Hay luces cálidas en las ventanas, nieve cayendo y la cámara sigue al tren desde el aire..."
+            ></textarea>
+
+
+            <div class="generador-video-contador">
+                <span id="video-prompt-contador">
+                    0
+                </span>
+                / 2000
+            </div>
+
+
+
+            <!-- TIPO DE VÍDEO -->
+
+            <div class="generador-video-seccion">
+
+                <span class="generador-video-label">
+                    Tipo de vídeo
+                </span>
+
+
+                <div class="generador-video-opciones">
+
+                    <button
+                        type="button"
+                        class="generador-video-opcion activo"
+                        data-video-tipo="cinematico"
+                        onclick="seleccionarTipoVideo('cinematico', this)"
+                    >
+                        <span>🎬</span>
+                        <div>
+                            <strong>Cinemático</strong>
+                            <small>Estilo película</small>
+                        </div>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="generador-video-opcion"
+                        data-video-tipo="animacion"
+                        onclick="seleccionarTipoVideo('animacion', this)"
+                    >
+                        <span>✨</span>
+                        <div>
+                            <strong>Animación</strong>
+                            <small>Animación 3D</small>
+                        </div>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DURACIÓN -->
+
+            <div class="generador-video-seccion">
+
+                <label
+                    for="video-duracion"
+                    class="generador-video-label"
+                >
+                    Duración
+                </label>
+
+
+                <select
+                    id="video-duracion"
+                    class="generador-video-select"
+                >
+
+                    <option value="5">
+                        5 segundos
+                    </option>
+
+                    <option value="10" selected>
+                        10 segundos
+                    </option>
+
+                    <option value="15">
+                        15 segundos
+                    </option>
+
+                    <option value="30">
+                        30 segundos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- FORMATO -->
+
+            <div class="generador-video-seccion">
+
+                <span class="generador-video-label">
+                    Formato
+                </span>
+
+
+                <div class="generador-video-formatos">
+
+                    <button
+                        type="button"
+                        class="generador-video-formato activo"
+                        onclick="seleccionarFormatoVideo('16:9', this)"
+                    >
+                        <strong>16:9</strong>
+                        <small>Horizontal</small>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="generador-video-formato"
+                        onclick="seleccionarFormatoVideo('9:16', this)"
+                    >
+                        <strong>9:16</strong>
+                        <small>Vertical</small>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="generador-video-formato"
+                        onclick="seleccionarFormatoVideo('1:1', this)"
+                    >
+                        <strong>1:1</strong>
+                        <small>Cuadrado</small>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CALIDAD -->
+
+            <div class="generador-video-seccion">
+
+                <label
+                    for="video-calidad"
+                    class="generador-video-label"
+                >
+                    Calidad
+                </label>
+
+
+                <select
+                    id="video-calidad"
+                    class="generador-video-select"
+                >
+
+                    <option value="720p">
+                        HD · 720p
+                    </option>
+
+                    <option value="1080p" selected>
+                        Full HD · 1080p
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- BOTÓN -->
+
+            <button
+                type="button"
+                class="generador-video-generar"
+                onclick="generarVideo3D()"
+            >
+
+                <span>
+                    ✨
+                </span>
+
+                Generar vídeo
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- =================================================
+             ÁREA DE PREVISUALIZACIÓN
+             ================================================= -->
+
+        <main class="generador-video-preview">
+
+
+            <div class="generador-video-preview-header">
+
+                <div>
+
+                    <span>
+                        PREVISUALIZACIÓN
+                    </span>
+
+                    <h2 id="video-escena-titulo">
+                        Tu vídeo aparecerá aquí
+                    </h2>
+
+                </div>
+
+
+                <div class="generador-video-preview-controles">
+
+                    <button
+                        type="button"
+                        onclick="reproducirVideoPreview()"
+                        aria-label="Reproducir"
+                    >
+                        ▶
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="reiniciarVideoPreview()"
+                        aria-label="Reiniciar"
+                    >
+                        ↻
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="pantallaCompletaVideo()"
+                        aria-label="Pantalla completa"
+                    >
+                        ⛶
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VISOR -->
+
+            <div
+                id="video-preview"
+                class="generador-video-preview-visor"
+            >
+
+
+                <div class="generador-video-preview-vacio">
+
+                    <div class="generador-video-play-grande">
+                        ▶
+                    </div>
+
+
+                    <h3>
+                        Crea tu primera escena
+                    </h3>
+
+
+                    <p>
+                        Describe una escena y StudyAI preparará tu vídeo 3D.
+                    </p>
+
+                </div>
+
+
+                <!-- CAPA DE CARGA -->
+
+                <div
+                    id="video-generando"
+                    class="generador-video-generando oculto"
+                >
+
+                    <div class="generador-video-spinner"></div>
+
+
+                    <strong>
+                        Construyendo tu vídeo...
+                    </strong>
+
+
+                    <span id="video-generando-texto">
+                        Preparando escena 3D
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BARRA INFERIOR -->
+
+            <div class="generador-video-timeline">
+
+
+                <div class="generador-video-tiempo">
+
+                    <span id="video-tiempo-actual">
+                        00:00
+                    </span>
+
+                    <span>
+                        /
+                    </span>
+
+                    <span id="video-tiempo-total">
+                        00:10
+                    </span>
+
+                </div>
+
+
+                <input
+                    type="range"
+                    id="video-timeline"
+                    min="0"
+                    max="10"
+                    value="0"
+                    step="0.1"
+                >
+
+
+                <button
+                    type="button"
+                    class="generador-video-descargar"
+                    onclick="descargarVideoGenerado()"
+                >
+                    ↓ Exportar
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =================================================
+         IDEAS
+         ================================================= -->
+
+    <div class="generador-video-ideas">
+
+        <div>
+
+            <span>
+                IDEAS PARA EMPEZAR
+            </span>
+
+            <h2>
+                ¿Qué quieres crear?
+            </h2>
+
+        </div>
+
+
+        <button
+            type="button"
+            onclick="usarPromptVideo('Una ciudad futurista de noche con enormes rascacielos, coches voladores y luces de neón mientras la cámara sobrevuela la ciudad.')"
+        >
+            🌃 Ciudad futurista
+        </button>
+
+
+        <button
+            type="button"
+            onclick="usarPromptVideo('Un tren antiguo atraviesa un paisaje nevado al atardecer, con nieve cayendo y una cámara cinematográfica siguiéndolo desde las vías.')"
+        >
+            🚂 Tren nevado
+        </button>
+
+
+        <button
+            type="button"
+            onclick="usarPromptVideo('Un astronauta camina sobre Marte mientras el sol aparece detrás de una enorme montaña y la cámara se aleja lentamente.')"
+        >
+            🚀 Marte
+        </button>
+
+
+        <button
+            type="button"
+            onclick="usarPromptVideo('Una habitación de estudiante durante una noche de tormenta, con un ordenador encendido y gotas de lluvia golpeando la ventana.')"
+        >
+            🖥️ Habitación
+        </button>
+
+    </div>
+
+</section>
 
         <!-- =====================================================
              CONTENIDO PRINCIPAL

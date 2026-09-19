@@ -1,6 +1,5 @@
 /* =========================================================
    STUDYAI - SCRIPT PRINCIPAL
-   Compatible con el index.html actual
    ========================================================= */
 
 "use strict";
@@ -35,24 +34,49 @@ let ultimaGeneracion = null;
    ========================================================= */
 
 function leerStorage(clave, defecto = []) {
+
     try {
+
         const bruto = localStorage.getItem(clave);
-        if (bruto === null || bruto === "") return defecto;
+
+        if (!bruto) {
+            return defecto;
+        }
+
         const datos = JSON.parse(bruto);
+
         return datos ?? defecto;
+
     } catch (error) {
-        console.warn(`StudyAI: no se pudo leer ${clave}.`, error);
+
+        console.warn(
+            "StudyAI: error leyendo " + clave,
+            error
+        );
+
         return defecto;
     }
 }
 
 
 function guardarStorage(clave, datos) {
+
     try {
-        localStorage.setItem(clave, JSON.stringify(datos));
+
+        localStorage.setItem(
+            clave,
+            JSON.stringify(datos)
+        );
+
         return true;
+
     } catch (error) {
-        console.error(`StudyAI: no se pudo guardar ${clave}.`, error);
+
+        console.error(
+            "StudyAI: error guardando " + clave,
+            error
+        );
+
         return false;
     }
 }
@@ -70,7 +94,8 @@ function ocultarPantallasPrincipales() {
         "editar-perfil-screen"
     ];
 
-    pantallas.forEach(id => {
+    pantallas.forEach(function(id) {
+
         const elemento = $(id);
 
         if (elemento) {
@@ -86,10 +111,12 @@ function ocultarVistasApp() {
         "perfil-panel",
         "biblioteca-screen",
         "materia-screen",
-        "modo-estudio"
+        "modo-estudio",
+        "generador-video-screen"
     ];
 
-    vistas.forEach(id => {
+    vistas.forEach(function(id) {
+
         const elemento = $(id);
 
         if (elemento) {
@@ -150,8 +177,6 @@ function mostrarLogin() {
         app.classList.add("oculto");
     }
 
-    ocultarVistasApp();
-
     const inicio = $("inicio");
 
     if (inicio) {
@@ -188,8 +213,6 @@ function volverStudyAI() {
 
 function iniciarSesionGoogle() {
 
-    console.log("Iniciando sesión con Google...");
-
     window.location.href = "/auth/google";
 }
 
@@ -198,12 +221,17 @@ async function comprobarUsuario() {
 
     try {
 
-        const respuesta = await fetch("/api/usuario", {
-            credentials: "include"
-        });
+        const respuesta = await fetch(
+            "/api/usuario",
+            {
+                credentials: "include"
+            }
+        );
 
         if (!respuesta.ok) {
+
             actualizarUsuarioUI(null);
+
             return null;
         }
 
@@ -212,20 +240,16 @@ async function comprobarUsuario() {
         usuarioActual =
             datos.usuario ||
             datos.user ||
-            datos ||
             null;
 
-        if (
-            datos &&
-            (
-                datos.usuario ||
-                datos.user ||
-                datos.autenticado === true ||
-                datos.loggedIn === true
-            )
-        ) {
-            actualizarUsuarioUI(usuarioActual);
+        if (usuarioActual) {
+
+            actualizarUsuarioUI(
+                usuarioActual
+            );
+
         } else {
+
             actualizarUsuarioUI(null);
         }
 
@@ -246,7 +270,7 @@ async function comprobarUsuario() {
 
 
 /* =========================================================
-   USUARIO / PERFIL
+   USUARIO
    ========================================================= */
 
 function obtenerNombreUsuario(usuario) {
@@ -282,7 +306,7 @@ function obtenerEmailUsuario(usuario) {
 
 function obtenerFotoUsuario(usuario) {
 
-    if (!usuario || typeof usuario !== "object") {
+    if (!usuario) {
         return "/images/logo.png";
     }
 
@@ -303,23 +327,27 @@ function obtenerFotoUsuario(usuario) {
         usuario.google_photo
     ];
 
-    const foto = candidatos.find(
-        valor =>
+    const foto = candidatos.find(function(valor) {
+
+        return (
             typeof valor === "string" &&
             valor.trim().length > 0
-    );
+        );
+    });
 
     return foto || "/images/logo.png";
 }
 
 
 function actualizarUsuarioUI(usuario) {
+
     const botonLogin = $("boton-login-header");
     const botonPerfil = $("boton-perfil-header");
     const nombre = $("nombre-usuario-header");
     const fotoHeader = $("foto-usuario-header");
 
     if (!usuario) {
+
         usuarioActual = null;
 
         if (botonLogin) {
@@ -349,13 +377,16 @@ function actualizarUsuarioUI(usuario) {
     }
 
     if (nombre) {
-        nombre.textContent = obtenerNombreUsuario(usuario);
+        nombre.textContent =
+            obtenerNombreUsuario(usuario);
     }
 
-    const foto = obtenerFotoUsuario(usuario);
+    const foto =
+        obtenerFotoUsuario(usuario);
 
     if (fotoHeader) {
-        fotoHeader.onerror = function () {
+
+        fotoHeader.onerror = function() {
             this.onerror = null;
             this.src = "/images/logo.png";
         };
@@ -363,10 +394,12 @@ function actualizarUsuarioUI(usuario) {
         fotoHeader.src = foto;
     }
 
-    const fotoGrande = $("perfil-foto-grande");
+    const fotoGrande =
+        $("perfil-foto-grande");
 
     if (fotoGrande) {
-        fotoGrande.onerror = function () {
+
+        fotoGrande.onerror = function() {
             this.onerror = null;
             this.src = "/images/logo.png";
         };
@@ -374,10 +407,18 @@ function actualizarUsuarioUI(usuario) {
         fotoGrande.src = foto;
     }
 }
+
+
+/* =========================================================
+   PERFIL
+   ========================================================= */
+
 function abrirPerfil() {
 
     if (!usuarioActual) {
+
         mostrarLogin();
+
         return;
     }
 
@@ -391,7 +432,9 @@ function abrirPerfil() {
 
     panel.classList.remove("oculto");
 
-    cargarPerfilUI(usuarioActual);
+    cargarPerfilUI(
+        usuarioActual
+    );
 }
 
 
@@ -411,8 +454,11 @@ function cargarPerfilUI(usuario) {
         return;
     }
 
-    const nombre = obtenerNombreUsuario(usuario);
-    const email = obtenerEmailUsuario(usuario);
+    const nombre =
+        obtenerNombreUsuario(usuario);
+
+    const email =
+        obtenerEmailUsuario(usuario);
 
     const username =
         usuario.username ||
@@ -436,71 +482,77 @@ function cargarPerfilUI(usuario) {
                 ""
             );
 
-    const nombreGrande = $("perfil-nombre-grande");
+    const elementos = {
+        "perfil-nombre-grande": {
+            propiedad: "textContent",
+            valor: nombre
+        },
 
-    if (nombreGrande) {
-        nombreGrande.textContent = nombre;
-    }
+        "perfil-email": {
+            propiedad: "textContent",
+            valor: email
+        },
 
-    const emailElemento = $("perfil-email");
+        "perfil-username": {
+            propiedad: "value",
+            valor: username
+        },
 
-    if (emailElemento) {
-        emailElemento.textContent = email;
-    }
+        "perfil-biografia": {
+            propiedad: "value",
+            valor: biografia
+        },
 
-    const usernameElemento = $("perfil-username");
+        "perfil-curso": {
+            propiedad: "value",
+            valor: curso
+        },
 
-    if (usernameElemento) {
-        usernameElemento.value = username;
-    }
+        "perfil-asignaturas": {
+            propiedad: "value",
+            valor: asignaturas
+        },
 
-    const bioElemento = $("perfil-biografia");
+        "editar-username": {
+            propiedad: "value",
+            valor: username
+        },
 
-    if (bioElemento) {
-        bioElemento.value = biografia;
-    }
+        "editar-biografia": {
+            propiedad: "value",
+            valor: biografia
+        },
 
-    const cursoElemento = $("perfil-curso");
+        "editar-curso": {
+            propiedad: "value",
+            valor: curso
+        },
 
-    if (cursoElemento) {
-        cursoElemento.value = curso;
-    }
+        "editar-asignaturas": {
+            propiedad: "value",
+            valor: asignaturas
+        }
+    };
 
-    const asignaturasElemento = $("perfil-asignaturas");
+    Object.keys(elementos).forEach(function(id) {
 
-    if (asignaturasElemento) {
-        asignaturasElemento.value = asignaturas;
-    }
+        const elemento = $(id);
 
-    const editarUsername = $("editar-username");
+        if (!elemento) {
+            return;
+        }
 
-    if (editarUsername) {
-        editarUsername.value = username;
-    }
-
-    const editarBio = $("editar-biografia");
-
-    if (editarBio) {
-        editarBio.value = biografia;
-    }
-
-    const editarCurso = $("editar-curso");
-
-    if (editarCurso) {
-        editarCurso.value = curso;
-    }
-
-    const editarAsignaturas = $("editar-asignaturas");
-
-    if (editarAsignaturas) {
-        editarAsignaturas.value = asignaturas;
-    }
+        elemento[
+            elementos[id].propiedad
+        ] = elementos[id].valor;
+    });
 }
 
 
 function editarPerfil() {
 
     if (!usuarioActual) {
+        mostrarLogin();
         return;
     }
 
@@ -510,29 +562,29 @@ function editarPerfil() {
         panel.classList.add("oculto");
     }
 
-    const pantalla = $("editar-perfil-screen");
+    const pantalla =
+        $("editar-perfil-screen");
 
     if (pantalla) {
         pantalla.classList.remove("oculto");
     }
 
-    cargarPerfilUI(usuarioActual);
+    cargarPerfilUI(
+        usuarioActual
+    );
 }
 
 
 function cerrarEditarPerfil() {
 
-    const pantalla = $("editar-perfil-screen");
+    const pantalla =
+        $("editar-perfil-screen");
 
     if (pantalla) {
         pantalla.classList.add("oculto");
     }
 
-    const app = $("app");
-
-    if (app) {
-        app.classList.remove("oculto");
-    }
+    mostrarApp();
 
     abrirPerfil();
 }
@@ -541,7 +593,9 @@ function cerrarEditarPerfil() {
 async function guardarPerfil() {
 
     if (!usuarioActual) {
+
         mostrarLogin();
+
         return;
     }
 
@@ -560,7 +614,9 @@ async function guardarPerfil() {
     const asignaturas =
         asignaturasTexto
             .split(",")
-            .map(item => item.trim())
+            .map(function(item) {
+                return item.trim();
+            })
             .filter(Boolean);
 
     const perfil = {
@@ -611,7 +667,7 @@ async function guardarPerfil() {
     } catch (error) {
 
         console.warn(
-            "No se pudo guardar el perfil en servidor:",
+            "No se pudo guardar el perfil:",
             error
         );
 
@@ -621,18 +677,24 @@ async function guardarPerfil() {
         };
     }
 
-    actualizarUsuarioUI(usuarioActual);
+    actualizarUsuarioUI(
+        usuarioActual
+    );
 
-    const pantalla = $("editar-perfil-screen");
+    const pantalla =
+        $("editar-perfil-screen");
 
     if (pantalla) {
         pantalla.classList.add("oculto");
     }
 
     mostrarApp();
+
     abrirPerfil();
 
-    alert("Perfil actualizado correctamente.");
+    alert(
+        "Perfil actualizado correctamente."
+    );
 }
 
 
@@ -642,7 +704,8 @@ async function guardarPerfil() {
 
 function cerrarPublicidad() {
 
-    const publicidad = $("studyai-publicidad");
+    const publicidad =
+        $("studyai-publicidad");
 
     if (publicidad) {
         publicidad.classList.add("oculto");
@@ -652,7 +715,8 @@ function cerrarPublicidad() {
 
 function mostrarPublicidad() {
 
-    const publicidad = $("studyai-publicidad");
+    const publicidad =
+        $("studyai-publicidad");
 
     if (publicidad) {
         publicidad.classList.remove("oculto");
@@ -661,34 +725,77 @@ function mostrarPublicidad() {
 
 
 /* =========================================================
-   MODOS DE GENERACIÓN
+   MODOS
    ========================================================= */
 
-function seleccionarModo(modo, boton = null) {
-    const modosValidos = new Set(["resumen", "preguntas", "flashcards", "examen"]);
-    if (!modosValidos.has(modo)) return;
+function seleccionarModo(
+    modo,
+    boton = null
+) {
+
+    const modosValidos = [
+        "resumen",
+        "preguntas",
+        "flashcards",
+        "examen"
+    ];
+
+    if (!modosValidos.includes(modo)) {
+        return;
+    }
 
     modoActual = modo;
 
     const tipo = $("tipo");
-    if (tipo) tipo.value = modo;
 
-    document.querySelectorAll(".modo").forEach(elemento => {
-        elemento.classList.remove("activo");
-    });
+    if (tipo) {
+        tipo.value = modo;
+    }
+
+    document
+        .querySelectorAll(".modo")
+        .forEach(function(elemento) {
+
+            elemento.classList.remove(
+                "activo"
+            );
+        });
 
     if (boton) {
-        boton.classList.add("activo");
+
+        boton.classList.add(
+            "activo"
+        );
+
         return;
     }
 
-    const candidato = [...document.querySelectorAll(".modo")].find(elemento => {
-        const onclick = elemento.getAttribute("onclick") || "";
-        const dataModo = elemento.dataset.modo || "";
-        return dataModo === modo || onclick.includes(`'${modo}'`) || onclick.includes(`"${modo}"`);
-    });
+    const candidatos =
+        document.querySelectorAll(".modo");
 
-    if (candidato) candidato.classList.add("activo");
+    candidatos.forEach(function(elemento) {
+
+        const dataModo =
+            elemento.dataset.modo || "";
+
+        const onclick =
+            elemento.getAttribute("onclick") || "";
+
+        if (
+            dataModo === modo ||
+            onclick.includes(
+                "'" + modo + "'"
+            ) ||
+            onclick.includes(
+                '"' + modo + '"'
+            )
+        ) {
+
+            elemento.classList.add(
+                "activo"
+            );
+        }
+    });
 }
 
 
@@ -697,56 +804,106 @@ function seleccionarModo(modo, boton = null) {
    ========================================================= */
 
 function seleccionarArchivos(event) {
-    const input = event?.target;
-    if (!input?.files) return;
 
-    const permitidos = new Set([
-        "text/plain",
-        "application/pdf",
-        "image/png",
-        "image/jpeg",
-        "image/webp"
-    ]);
+    const input =
+        event?.target;
+
+    if (!input?.files) {
+        return;
+    }
 
     const MAX_ARCHIVOS = 5;
-    const MAX_BYTES = 10 * 1024 * 1024;
+    const MAX_BYTES =
+        10 * 1024 * 1024;
+
+    const extensiones = [
+        "txt",
+        "pdf",
+        "png",
+        "jpg",
+        "jpeg",
+        "webp"
+    ];
+
     const nuevos = [];
 
-    for (const archivo of Array.from(input.files)) {
-        const extension = archivo.name.toLowerCase().split(".").pop();
-        const extensionValida = ["txt", "pdf", "png", "jpg", "jpeg", "webp"].includes(extension);
+    Array.from(input.files)
+        .forEach(function(archivo) {
 
-        if (!extensionValida && !permitidos.has(archivo.type)) {
-            alert(`Archivo no compatible: ${archivo.name}`);
-            continue;
-        }
+            const extension =
+                archivo.name
+                    .toLowerCase()
+                    .split(".")
+                    .pop();
 
-        if (archivo.size > MAX_BYTES) {
-            alert(`${archivo.name} supera el límite de 10 MB.`);
-            continue;
-        }
+            if (!extensiones.includes(extension)) {
 
-        const repetido = archivosSeleccionados.some(
-            actual => actual.name === archivo.name &&
-                      actual.size === archivo.size &&
-                      actual.lastModified === archivo.lastModified
+                alert(
+                    "Archivo no compatible: " +
+                    archivo.name
+                );
+
+                return;
+            }
+
+            if (archivo.size > MAX_BYTES) {
+
+                alert(
+                    archivo.name +
+                    " supera el límite de 10 MB."
+                );
+
+                return;
+            }
+
+            const repetido =
+                archivosSeleccionados.some(
+                    function(actual) {
+
+                        return (
+                            actual.name === archivo.name &&
+                            actual.size === archivo.size &&
+                            actual.lastModified ===
+                                archivo.lastModified
+                        );
+                    }
+                );
+
+            if (!repetido) {
+                nuevos.push(archivo);
+            }
+        });
+
+    const disponibles =
+        MAX_ARCHIVOS -
+        archivosSeleccionados.length;
+
+    if (nuevos.length > disponibles) {
+
+        alert(
+            "Puedes adjuntar un máximo de 5 archivos."
         );
-
-        if (!repetido) nuevos.push(archivo);
     }
 
-    archivosSeleccionados = [...archivosSeleccionados, ...nuevos].slice(0, MAX_ARCHIVOS);
-
-    if (Array.from(input.files).length + archivosSeleccionados.length > MAX_ARCHIVOS) {
-        alert("Puedes adjuntar un máximo de 5 archivos.");
-    }
+    archivosSeleccionados =
+        archivosSeleccionados
+            .concat(nuevos)
+            .slice(0, MAX_ARCHIVOS);
 
     mostrarArchivosSeleccionados();
+
     input.value = "";
 }
 
 
 function eliminarArchivo(indice) {
+
+    if (
+        indice < 0 ||
+        indice >= archivosSeleccionados.length
+    ) {
+        return;
+    }
 
     archivosSeleccionados.splice(
         indice,
@@ -758,60 +915,123 @@ function eliminarArchivo(indice) {
 
 
 function mostrarArchivosSeleccionados() {
-    const lista = $("archivos-seleccionados");
-    const contador = $("archivos-contador");
 
-    if (contador) contador.textContent = `${archivosSeleccionados.length}/5`;
-    if (!lista) return;
+    const lista =
+        $("archivos-seleccionados");
 
-    if (!archivosSeleccionados.length) {
-        lista.innerHTML = "";
+    const contador =
+        $("archivos-contador");
+
+    if (contador) {
+
+        contador.textContent =
+            archivosSeleccionados.length +
+            "/5";
+    }
+
+    if (!lista) {
         return;
     }
 
-    lista.innerHTML = archivosSeleccionados.map((archivo, indice) => {
-        const tamaño = formatearTamaño(archivo.size);
-        const tipo = obtenerTipoArchivo(archivo);
+    lista.innerHTML = "";
 
-        return `
-            <div class="archivo-item" data-indice="${indice}">
-                <span aria-hidden="true">${tipo}</span>
-                <div>
-                    <strong title="${escaparHTML(archivo.name)}">${escaparHTML(archivo.name)}</strong>
-                    <small>${escaparHTML(tamaño)}</small>
-                </div>
-                <button type="button"
-                    onclick="eliminarArchivo(${indice})"
-                    aria-label="Eliminar ${escaparHTML(archivo.name)}">×</button>
-            </div>
-        `;
-    }).join("");
+    archivosSeleccionados.forEach(
+        function(archivo, indice) {
+
+            const elemento =
+                document.createElement("div");
+
+            elemento.className =
+                "archivo-seleccionado";
+
+            const nombre =
+                document.createElement("span");
+
+            nombre.textContent =
+                archivo.name;
+
+            const boton =
+                document.createElement("button");
+
+            boton.type = "button";
+            boton.textContent = "×";
+
+            boton.addEventListener(
+                "click",
+                function() {
+                    eliminarArchivo(indice);
+                }
+            );
+
+            elemento.appendChild(nombre);
+            elemento.appendChild(boton);
+
+            lista.appendChild(elemento);
+        }
+    );
 }
 
 
 function obtenerTipoArchivo(archivo) {
-    const nombre = String(archivo?.name || "").toLowerCase();
-    if (nombre.endsWith(".pdf")) return "PDF";
-    if (nombre.endsWith(".txt")) return "TXT";
-    if (/\.(png|jpg|jpeg|webp)$/.test(nombre)) return "IMG";
+
+    const nombre =
+        String(
+            archivo?.name || ""
+        ).toLowerCase();
+
+    if (nombre.endsWith(".pdf")) {
+        return "PDF";
+    }
+
+    if (nombre.endsWith(".txt")) {
+        return "TXT";
+    }
+
+    if (
+        /\.(png|jpg|jpeg|webp)$/
+            .test(nombre)
+    ) {
+        return "IMG";
+    }
+
     return "FILE";
 }
 
+
 function formatearTamaño(bytes) {
-    const numero = Number(bytes) || 0;
-    if (numero < 1024) return `${numero} B`;
-    if (numero < 1024 * 1024) return `${(numero / 1024).toFixed(1)} KB`;
-    return `${(numero / (1024 * 1024)).toFixed(1)} MB`;
+
+    const numero =
+        Number(bytes) || 0;
+
+    if (numero < 1024) {
+        return numero + " B";
+    }
+
+    if (
+        numero <
+        1024 * 1024
+    ) {
+
+        return (
+            numero / 1024
+        ).toFixed(1) + " KB";
+    }
+
+    return (
+        numero /
+        (1024 * 1024)
+    ).toFixed(1) + " MB";
 }
 
 
 /* =========================================================
-   GENERADOR
+   GENERACIÓN IA
    ========================================================= */
 
 async function generar() {
 
-    const apuntesElemento = $("apuntes");
+    const apuntesElemento =
+        $("apuntes");
 
     if (!apuntesElemento) {
         return;
@@ -820,11 +1040,13 @@ async function generar() {
     let texto =
         apuntesElemento.value.trim();
 
-    if (!texto && archivosSeleccionados.length) {
+    if (
+        !texto &&
+        archivosSeleccionados.length
+    ) {
 
         texto =
             await extraerTextoArchivos();
-
     }
 
     if (!texto) {
@@ -836,17 +1058,17 @@ async function generar() {
         return;
     }
 
-    const resultado = $("resultado");
+    const resultado =
+        $("resultado");
 
     if (resultado) {
 
-        resultado.innerHTML = `
-            <div class="studyai-empty">
-                <div class="studyai-empty-icon">⏳</div>
-                <h3>Generando...</h3>
-                <p>StudyAI está preparando tu contenido.</p>
-            </div>
-        `;
+        resultado.innerHTML =
+            '<div class="studyai-empty">' +
+                '<div class="studyai-empty-icon">⏳</div>' +
+                '<h3>Generando...</h3>' +
+                '<p>StudyAI está preparando tu contenido.</p>' +
+            '</div>';
     }
 
     const tipo =
@@ -861,21 +1083,29 @@ async function generar() {
                 "/api/generar",
                 {
                     method: "POST",
+
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type":
+                            "application/json"
                     },
+
                     credentials: "include",
+
                     body: JSON.stringify({
-                        texto,
+                        texto: texto,
                         apuntes: texto,
-                        tipo,
+                        tipo: tipo,
                         modo: tipo
                     })
                 }
             );
 
-        const datos =
-            await respuesta.json();
+        let datos = {};
+
+        try {
+            datos =
+                await respuesta.json();
+        } catch (_) {}
 
         if (!respuesta.ok) {
 
@@ -896,6 +1126,7 @@ async function generar() {
             "";
 
         if (!contenido) {
+
             throw new Error(
                 "El servidor no devolvió contenido."
             );
@@ -903,10 +1134,11 @@ async function generar() {
 
         ultimaGeneracion = {
             id: Date.now(),
-            tipo,
+            tipo: tipo,
             textoOriginal: texto,
-            contenido,
-            fecha: new Date().toISOString()
+            contenido: contenido,
+            fecha:
+                new Date().toISOString()
         };
 
         mostrarResultado(
@@ -927,20 +1159,17 @@ async function generar() {
 
         if (resultado) {
 
-            resultado.innerHTML = `
-                <div class="studyai-empty">
-                    <div class="studyai-empty-icon">⚠️</div>
-
-                    <h3>No se pudo generar</h3>
-
-                    <p>
-                        ${escaparHTML(
+            resultado.innerHTML =
+                '<div class="studyai-empty">' +
+                    '<div class="studyai-empty-icon">⚠️</div>' +
+                    '<h3>No se pudo generar</h3>' +
+                    '<p>' +
+                        escaparHTML(
                             error.message ||
                             "Ha ocurrido un error."
-                        )}
-                    </p>
-                </div>
-            `;
+                        ) +
+                    '</p>' +
+                '</div>';
         }
     }
 }
@@ -950,17 +1179,24 @@ async function extraerTextoArchivos() {
 
     let resultado = "";
 
-    for (const archivo of archivosSeleccionados) {
+    for (
+        const archivo of archivosSeleccionados
+    ) {
 
         if (
-            archivo.type === "text/plain" ||
-            archivo.name.toLowerCase().endsWith(".txt")
+            archivo.type ===
+                "text/plain" ||
+            archivo.name
+                .toLowerCase()
+                .endsWith(".txt")
         ) {
 
             try {
 
                 resultado +=
-                    `\n\n--- ${archivo.name} ---\n\n`;
+                    "\n\n--- " +
+                    archivo.name +
+                    " ---\n\n";
 
                 resultado +=
                     await archivo.text();
@@ -968,7 +1204,7 @@ async function extraerTextoArchivos() {
             } catch (error) {
 
                 console.warn(
-                    "No se pudo leer:",
+                    "No se pudo leer " +
                     archivo.name,
                     error
                 );
@@ -977,8 +1213,9 @@ async function extraerTextoArchivos() {
         } else {
 
             resultado +=
-                `\n\n--- Archivo adjunto: ${archivo.name} ---\n\n`;
-
+                "\n\n--- Archivo adjunto: " +
+                archivo.name +
+                " ---\n\n";
         }
     }
 
@@ -987,29 +1224,38 @@ async function extraerTextoArchivos() {
 
 
 /* =========================================================
-   MOSTRAR RESULTADO
+   RESULTADO
    ========================================================= */
 
-function mostrarResultado(contenido, tipo) {
+function mostrarResultado(
+    contenido,
+    tipo
+) {
 
-    const resultado = $("resultado");
+    const resultado =
+        $("resultado");
 
     if (!resultado) {
         return;
     }
 
-    let html;
+    let html = "";
 
-    if (typeof contenido === "object") {
+    if (
+        typeof contenido ===
+        "object"
+    ) {
 
         html =
-            `<pre>${escaparHTML(
+            "<pre>" +
+            escaparHTML(
                 JSON.stringify(
                     contenido,
                     null,
                     2
                 )
-            )}</pre>`;
+            ) +
+            "</pre>";
 
     } else {
 
@@ -1019,27 +1265,48 @@ function mostrarResultado(contenido, tipo) {
             );
     }
 
-    resultado.innerHTML = `
-        <div class="resultado-generado">
+    const contenedor =
+        document.createElement("div");
 
-            <div class="resultado-cabecera">
+    contenedor.className =
+        "resultado-generado";
 
-                <span>
-                    ${iconoModo(tipo)}
-                </span>
+    const cabecera =
+        document.createElement("div");
 
-                <strong>
-                    ${nombreModo(tipo)}
-                </strong>
+    cabecera.className =
+        "resultado-cabecera";
 
-            </div>
+    cabecera.innerHTML =
+        "<span>" +
+        iconoModo(tipo) +
+        "</span>" +
+        "<strong>" +
+        nombreModo(tipo) +
+        "</strong>";
 
-            <div class="resultado-contenido">
-                ${html}
-            </div>
+    const contenidoElemento =
+        document.createElement("div");
 
-        </div>
-    `;
+    contenidoElemento.className =
+        "resultado-contenido";
+
+    contenidoElemento.innerHTML =
+        html;
+
+    contenedor.appendChild(
+        cabecera
+    );
+
+    contenedor.appendChild(
+        contenidoElemento
+    );
+
+    resultado.innerHTML = "";
+
+    resultado.appendChild(
+        contenedor
+    );
 }
 
 
@@ -1052,7 +1319,10 @@ function nombreModo(tipo) {
         flashcards: "Flashcards"
     };
 
-    return nombres[tipo] || "Contenido generado";
+    return (
+        nombres[tipo] ||
+        "Contenido generado"
+    );
 }
 
 
@@ -1065,82 +1335,195 @@ function iconoModo(tipo) {
         flashcards: "🧠"
     };
 
-    return iconos[tipo] || "✨";
+    return (
+        iconos[tipo] ||
+        "✨"
+    );
 }
 
 
 function convertirTextoHTML(texto) {
-    const limpio = String(texto ?? "")
-        .replace(/\r\n/g, "\n")
-        .replace(/\r/g, "\n")
-        .replace(/```(?:text|markdown|md)?/gi, "")
-        .replace(/```/g, "")
-        .trim();
 
-    if (!limpio) return "<p>Sin contenido.</p>";
+    const limpio =
+        String(texto ?? "")
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n")
+            .replace(/```(?:text|markdown|md)?/gi, "")
+            .replace(/```/g, "")
+            .trim();
 
-    const lineas = limpio.split("\n");
-    const html = [];
-    let lista = null;
-
-    const cerrarLista = () => {
-        if (lista === "ul") html.push("</ul>");
-        if (lista === "ol") html.push("</ol>");
-        lista = null;
-    };
-
-    const inline = valor => {
-        let salida = escaparHTML(valor);
-        salida = salida.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-        salida = salida.replace(/__(.+?)__/g, "<strong>$1</strong>");
-        salida = salida.replace(/`([^`]+)`/g, "<code>$1</code>");
-        return salida;
-    };
-
-    for (const lineaOriginal of lineas) {
-        const linea = lineaOriginal.trim();
-
-        if (!linea) {
-            cerrarLista();
-            continue;
-        }
-
-        const heading = linea.match(/^#{1,3}\s+(.+)$/);
-        if (heading) {
-            cerrarLista();
-            const nivel = Math.min(3, (linea.match(/^#+/) || [""])[0].length);
-            html.push(`<h${nivel}>${inline(heading[1])}</h${nivel}>`);
-            continue;
-        }
-
-        const numerada = linea.match(/^\d+[.)]\s+(.+)$/);
-        if (numerada) {
-            if (lista !== "ol") {
-                cerrarLista();
-                html.push("<ol>");
-                lista = "ol";
-            }
-            html.push(`<li>${inline(numerada[1])}</li>`);
-            continue;
-        }
-
-        const viñeta = linea.match(/^[-•·]\s+(.+)$/);
-        if (viñeta) {
-            if (lista !== "ul") {
-                cerrarLista();
-                html.push("<ul>");
-                lista = "ul";
-            }
-            html.push(`<li>${inline(viñeta[1])}</li>`);
-            continue;
-        }
-
-        cerrarLista();
-        html.push(`<p>${inline(linea)}</p>`);
+    if (!limpio) {
+        return "<p>Sin contenido.</p>";
     }
 
+    const lineas =
+        limpio.split("\n");
+
+    const html = [];
+
+    let lista = null;
+
+    function cerrarLista() {
+
+        if (lista === "ul") {
+            html.push("</ul>");
+        }
+
+        if (lista === "ol") {
+            html.push("</ol>");
+        }
+
+        lista = null;
+    }
+
+    function inline(valor) {
+
+        let salida =
+            escaparHTML(valor);
+
+        salida =
+            salida.replace(
+                /\*\*(.+?)\*\*/g,
+                "<strong>$1</strong>"
+            );
+
+        salida =
+            salida.replace(
+                /__(.+?)__/g,
+                "<strong>$1</strong>"
+            );
+
+        salida =
+            salida.replace(
+                /`([^`]+)`/g,
+                "<code>$1</code>"
+            );
+
+        return salida;
+    }
+
+    lineas.forEach(
+        function(lineaOriginal) {
+
+            const linea =
+                lineaOriginal.trim();
+
+            if (!linea) {
+
+                cerrarLista();
+
+                return;
+            }
+
+            const heading =
+                linea.match(
+                    /^#{1,3}\s+(.+)$/
+                );
+
+            if (heading) {
+
+                cerrarLista();
+
+                const nivel =
+                    Math.min(
+                        3,
+                        (
+                            linea.match(/^#+/) ||
+                            [""]
+                        )[0].length
+                    );
+
+                html.push(
+                    "<h" +
+                    nivel +
+                    ">" +
+                    inline(heading[1]) +
+                    "</h" +
+                    nivel +
+                    ">"
+                );
+
+                return;
+            }
+
+            const numerada =
+                linea.match(
+                    /^\d+[.)]\s+(.+)$/
+                );
+
+            if (numerada) {
+
+                if (lista !== "ol") {
+
+                    cerrarLista();
+
+                    html.push("<ol>");
+
+                    lista = "ol";
+                }
+
+                html.push(
+                    "<li>" +
+                    inline(numerada[1]) +
+                    "</li>"
+                );
+
+                return;
+            }
+
+            const viñeta =
+                linea.match(
+                    /^[-•·]\s+(.+)$/
+                );
+
+            if (viñeta) {
+
+                if (lista !== "ul") {
+
+                    cerrarLista();
+
+                    html.push("<ul>");
+
+                    lista = "ul";
+                }
+
+                html.push(
+                    "<li>" +
+                    inline(viñeta[1]) +
+                    "</li>"
+                );
+
+                return;
+            }
+
+            cerrarLista();
+
+            html.push(
+                "<p>" +
+                inline(linea) +
+                "</p>"
+            );
+        }
+    );
+
     cerrarLista();
+
     return html.join("");
+}
+
+
+function escaparHTML(valor) {
+
+    const texto =
+        String(valor ?? "");
+
+    const elemento =
+        document.createElement("div");
+
+    elemento.textContent =
+        texto;
+
+    return elemento.innerHTML;
 }
 
 
@@ -1148,286 +1531,115 @@ function convertirTextoHTML(texto) {
    SESIONES
    ========================================================= */
 
-function obtenerSesiones() {
+function registrarSesion(generacion) {
 
-    return leerStorage(
+    const sesiones =
+        leerStorage(
+            STORAGE.sesiones,
+            []
+        );
+
+    sesiones.unshift({
+        id: generacion.id,
+        tipo: generacion.tipo,
+        fecha: generacion.fecha,
+        textoOriginal:
+            generacion.textoOriginal,
+        contenido:
+            generacion.contenido
+    });
+
+    guardarStorage(
         STORAGE.sesiones,
-        []
+        sesiones.slice(0, 50)
     );
-}
-
-
-function registrarSesion(sesion) {
-    const sesiones = obtenerSesiones();
-
-    const nueva = {
-        id: Number(sesion.id) || Date.now(),
-        tipo: sesion.tipo || "preguntas",
-        textoOriginal: String(sesion.textoOriginal || ""),
-        contenido: sesion.contenido ?? "",
-        fecha: sesion.fecha || new Date().toISOString(),
-        guardadaManualmente: Boolean(sesion.guardadaManualmente)
-    };
-
-    const duplicada = sesiones.some(item =>
-        String(item.textoOriginal || "") === nueva.textoOriginal &&
-        String(item.tipo || "") === nueva.tipo &&
-        JSON.stringify(item.contenido) === JSON.stringify(nueva.contenido)
-    );
-
-    if (!duplicada) {
-        sesiones.unshift(nueva);
-        guardarStorage(STORAGE.sesiones, sesiones.slice(0, 100));
-    }
 
     mostrarSesiones();
 }
 
 
-function guardarSesion() {
-
-    if (!ultimaGeneracion) {
-
-        alert(
-            "Primero genera contenido para poder guardar la sesión."
-        );
-
-        return;
-    }
-
-    registrarSesion({
-        ...ultimaGeneracion,
-        id: Date.now(),
-        guardadaManualmente: true
-    });
-
-    alert(
-        "Sesión guardada correctamente."
-    );
-}
-
-
 function mostrarSesiones() {
-    const contenedor = $("sesiones");
+
+    const contenedor =
+        $("lista-sesiones");
 
     if (!contenedor) {
         return;
     }
 
-    const sesiones = obtenerSesiones();
-
-    const busqueda =
-        $("buscar-sesiones")?.value.trim().toLowerCase() || "";
-
-    const filtro =
-        $("filtro-sesiones")?.value || "todas";
-
-    const filtradas = sesiones.filter(sesion => {
-        const contenido = String(
-            sesion.contenido || ""
-        ).toLowerCase();
-
-        const textoOriginal = String(
-            sesion.textoOriginal || ""
-        ).toLowerCase();
-
-        const coincideBusqueda =
-            !busqueda ||
-            contenido.includes(busqueda) ||
-            textoOriginal.includes(busqueda) ||
-            nombreModo(sesion.tipo)
-                .toLowerCase()
-                .includes(busqueda);
-
-        const coincideTipo =
-            filtro === "todas" ||
-            sesion.tipo === filtro;
-
-        return coincideBusqueda && coincideTipo;
-    });
-
-    if (!filtradas.length) {
-        contenedor.innerHTML = `
-            <div class="studyai-empty sesiones-vacio">
-                <div class="studyai-empty-icon">💾</div>
-                <h3>No hay sesiones</h3>
-                <p>
-                    ${busqueda
-                        ? "No hemos encontrado ninguna sesión con esa búsqueda."
-                        : "Tus sesiones aparecerán aquí cuando generes contenido."
-                    }
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    contenedor.innerHTML = filtradas.map(sesion => {
-        const fecha = formatearFecha(sesion.fecha);
-
-        const texto =
-            String(sesion.textoOriginal || "")
-                .replace(/\s+/g, " ")
-                .trim();
-
-        const descripcion =
-            texto.length > 100
-                ? texto.substring(0, 100) + "..."
-                : texto || "Contenido generado con StudyAI.";
-
-        return `
-            <article class="sesion-item" data-sesion-id="${sesion.id}">
-
-                <div class="sesion-info">
-
-                    <div class="sesion-icono">
-                        ${iconoModo(sesion.tipo)}
-                    </div>
-
-                    <div class="sesion-textos">
-
-                        <strong>
-                            ${escaparHTML(nombreModo(sesion.tipo))}
-                        </strong>
-
-                        <span class="sesion-descripcion">
-                            ${escaparHTML(descripcion)}
-                        </span>
-
-                        <small>
-                            ${escaparHTML(fecha)}
-                        </small>
-
-                    </div>
-
-                </div>
-
-                <div class="sesion-acciones">
-
-                    <button
-                        type="button"
-                        class="sesion-btn-ver"
-                        onclick="abrirSesion(${Number(sesion.id)})"
-                    >
-                        Ver sesión
-                    </button>
-
-                    <button
-                        type="button"
-                        class="sesion-btn-eliminar"
-                        onclick="eliminarSesion(${Number(sesion.id)})"
-                        aria-label="Eliminar sesión"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-            </article>
-        `;
-    }).join("");
-}
-function abrirSesion(id) {
-    const sesiones = obtenerSesiones();
-
-    const sesion = sesiones.find(
-        item => Number(item.id) === Number(id)
-    );
-
-    if (!sesion) {
-        console.warn("StudyAI: sesión no encontrada:", id);
-        return;
-    }
-
-    ultimaGeneracion = {
-        ...sesion
-    };
-
-    const apuntes = $("apuntes");
-
-    if (apuntes) {
-        apuntes.value = sesion.textoOriginal || "";
-    }
-
-    seleccionarModo(sesion.tipo);
-
-    mostrarResultado(
-        sesion.contenido,
-        sesion.tipo
-    );
-
-    const resultado = $("resultado");
-
-    if (resultado) {
-        setTimeout(() => {
-            resultado.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }, 100);
-    }
-}
-function eliminarSesion(id) {
-
-    const confirmar =
-        confirm(
-            "¿Quieres eliminar esta sesión?"
+    const sesiones =
+        leerStorage(
+            STORAGE.sesiones,
+            []
         );
 
-    if (!confirmar) {
+    if (!sesiones.length) {
+
+        contenedor.innerHTML =
+            '<div class="studyai-empty">' +
+                '<div class="studyai-empty-icon">📚</div>' +
+                '<h3>Aún no tienes sesiones</h3>' +
+                '<p>Cuando generes contenido aparecerá aquí.</p>' +
+            '</div>';
+
         return;
     }
 
-    const sesiones =
-        obtenerSesiones()
-            .filter(
-                sesion => sesion.id !== id
+    contenedor.innerHTML = "";
+
+    sesiones.forEach(
+        function(sesion) {
+
+            const elemento =
+                document.createElement("div");
+
+            elemento.className =
+                "sesion-item";
+
+            const titulo =
+                document.createElement("strong");
+
+            titulo.textContent =
+                nombreModo(
+                    sesion.tipo
+                );
+
+            const fecha =
+                document.createElement("span");
+
+            fecha.textContent =
+                new Date(
+                    sesion.fecha
+                ).toLocaleDateString(
+                    "es-ES"
+                );
+
+            elemento.appendChild(
+                titulo
             );
 
-    guardarStorage(
-        STORAGE.sesiones,
-        sesiones
+            elemento.appendChild(
+                fecha
+            );
+
+            elemento.addEventListener(
+                "click",
+                function() {
+
+                    mostrarResultado(
+                        sesion.contenido,
+                        sesion.tipo
+                    );
+                }
+            );
+
+            contenedor.appendChild(
+                elemento
+            );
+        }
     );
-
-    mostrarSesiones();
 }
 
-
-function nuevaSesion() {
-    const apuntes = $("apuntes");
-
-    if (apuntes) {
-        apuntes.value = "";
-    }
-
-    archivosSeleccionados = [];
-
-    mostrarArchivosSeleccionados();
-
-    ultimaGeneracion = null;
-
-    seleccionarModo("preguntas");
-
-    const resultado = $("resultado");
-
-    if (resultado) {
-        resultado.innerHTML = `
-            <div class="studyai-empty">
-                <div class="studyai-empty-icon">✨</div>
-                <h3>Listo para estudiar</h3>
-                <p>
-                    Pega tus apuntes y genera contenido con StudyAI.
-                </p>
-            </div>
-        `;
-    }
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
 
 /* =========================================================
    BIBLIOTECA
@@ -1448,14 +1660,13 @@ function guardarBiblioteca(datos) {
         STORAGE.biblioteca,
         datos
     );
-
-    actualizarBiblioteca();
 }
 
 
 function abrirBiblioteca() {
 
     mostrarApp();
+
     ocultarVistasApp();
 
     const pantalla =
@@ -1465,372 +1676,152 @@ function abrirBiblioteca() {
         return;
     }
 
-    pantalla.classList.remove("oculto");
+    pantalla.classList.remove(
+        "oculto"
+    );
 
     actualizarBiblioteca();
 }
 
 
-function abrirBibliotecaAgregar() {
+function cerrarBiblioteca() {
 
-    const modal =
-        $("biblioteca-modal");
+    const pantalla =
+        $("biblioteca-screen");
 
-    if (!modal) {
-        return;
-    }
-
-    prepararSelectMaterias();
-
-    modal.classList.remove("oculto");
-}
-
-
-function cerrarBibliotecaAgregar() {
-
-    const modal =
-        $("biblioteca-modal");
-
-    if (modal) {
-        modal.classList.add("oculto");
-    }
-}
-
-
-function prepararSelectMaterias() {
-
-    const select =
-        $("biblioteca-materia");
-
-    if (!select) {
-        return;
-    }
-
-    const materias =
-        obtenerMaterias();
-
-    select.innerHTML = `
-        <option value="">
-            Selecciona una materia
-        </option>
-
-        ${materias
-            .map(materia => `
-                <option value="${escaparHTML(materia.nombre)}">
-                    ${escaparHTML(materia.nombre)}
-                </option>
-            `)
-            .join("")}
-    `;
-}
-
-
-function guardarMaterialBiblioteca() {
-
-    const titulo =
-        $("biblioteca-titulo")
-            ?.value
-            .trim();
-
-    const materia =
-        $("biblioteca-materia")
-            ?.value
-            .trim();
-
-    const texto =
-        $("biblioteca-texto")
-            ?.value
-            .trim();
-
-    if (!titulo) {
-
-        alert(
-            "Escribe un título."
+    if (pantalla) {
+        pantalla.classList.add(
+            "oculto"
         );
-
-        return;
     }
-
-    if (!texto) {
-
-        alert(
-            "Escribe los apuntes."
-        );
-
-        return;
-    }
-
-    const materiales =
-        obtenerBiblioteca();
-
-    materiales.unshift({
-        id: Date.now(),
-        titulo,
-        materia:
-            materia || "Sin materia",
-        texto,
-        fecha:
-            new Date().toISOString()
-    });
-
-    guardarBiblioteca(
-        materiales
-    );
-
-    const tituloInput =
-        $("biblioteca-titulo");
-
-    const textoInput =
-        $("biblioteca-texto");
-
-    if (tituloInput) {
-        tituloInput.value = "";
-    }
-
-    if (textoInput) {
-        textoInput.value = "";
-    }
-
-    cerrarBibliotecaAgregar();
-
-    alert(
-        "Material guardado correctamente."
-    );
 }
 
 
 function actualizarBiblioteca() {
 
-    const materiales =
-        obtenerBiblioteca();
-
-    const total =
-        $("biblioteca-total");
-
-    const materias =
-        $("biblioteca-materias");
-
-    const recientes =
-        $("biblioteca-recientes");
-
-    if (total) {
-        total.textContent =
-            materiales.length;
-    }
-
-    if (materias) {
-
-        const nombres =
-            new Set(
-                materiales
-                    .map(item => item.materia)
-                    .filter(Boolean)
-            );
-
-        materias.textContent =
-            nombres.size;
-    }
-
-    if (recientes) {
-
-        const limite =
-            Date.now() -
-            7 * 24 * 60 * 60 * 1000;
-
-        const cantidad =
-            materiales.filter(item =>
-                new Date(item.fecha).getTime() >=
-                limite
-            ).length;
-
-        recientes.textContent =
-            cantidad;
-    }
-
-    mostrarBiblioteca();
-}
-
-
-function filtrarBiblioteca(filtro) {
-
-    filtroBibliotecaActual =
-        filtro;
-
-    document
-        .querySelectorAll(".biblioteca-filtro")
-        .forEach(boton => {
-
-            boton.classList.toggle(
-                "activo",
-                boton.dataset.filtro === filtro
-            );
-
-        });
-
-    mostrarBiblioteca();
-}
-
-
-function mostrarBiblioteca() {
-
     const lista =
-        $("biblioteca-lista");
+        $("lista-biblioteca");
 
     if (!lista) {
         return;
     }
 
-    let materiales =
+    const biblioteca =
         obtenerBiblioteca();
 
-    const busqueda =
-        $("biblioteca-busqueda")
-            ?.value
-            .trim()
-            .toLowerCase() || "";
+    lista.innerHTML = "";
 
-    if (filtroBibliotecaActual === "recientes") {
+    if (!biblioteca.length) {
 
-        const limite =
-            Date.now() -
-            7 * 24 * 60 * 60 * 1000;
-
-        materiales =
-            materiales.filter(item =>
-                new Date(item.fecha).getTime() >=
-                limite
-            );
-    }
-
-    if (busqueda) {
-
-        materiales =
-            materiales.filter(item => {
-
-                const contenido = `
-                    ${item.titulo}
-                    ${item.materia}
-                    ${item.texto}
-                `.toLowerCase();
-
-                return contenido.includes(
-                    busqueda
-                );
-            });
-    }
-
-    if (!materiales.length) {
-
-        lista.innerHTML = `
-            <div class="estudio-vacio">
-                <div>📚</div>
-                <h3>No hay materiales</h3>
-                <p>
-                    Añade apuntes para empezar a construir tu biblioteca.
-                </p>
-            </div>
-        `;
+        lista.innerHTML =
+            '<div class="studyai-empty">' +
+                '<div class="studyai-empty-icon">📚</div>' +
+                '<h3>Tu biblioteca está vacía</h3>' +
+                '<p>Aquí podrás guardar tus materiales.</p>' +
+            '</div>';
 
         return;
     }
 
-    lista.innerHTML =
-        materiales
-            .map(item => `
+    biblioteca.forEach(
+        function(material) {
 
-                <article class="biblioteca-item">
+            const elemento =
+                document.createElement("div");
 
-                    <div class="biblioteca-item-icon">
-                        📖
-                    </div>
+            elemento.className =
+                "biblioteca-item";
 
-                    <div class="biblioteca-item-info">
+            elemento.textContent =
+                material.titulo ||
+                material.nombre ||
+                "Material";
 
-                        <h3>
-                            ${escaparHTML(item.titulo)}
-                        </h3>
+            elemento.addEventListener(
+                "click",
+                function() {
 
-                        <p>
-                            ${escaparHTML(item.materia)}
-                        </p>
+                    abrirContenidoBiblioteca(
+                        material
+                    );
+                }
+            );
 
-                        <small>
-                            ${formatearFecha(item.fecha)}
-                        </small>
-
-                    </div>
-
-                    <div class="biblioteca-item-acciones">
-
-                        <button
-                            type="button"
-                            onclick="verMaterialBiblioteca(${item.id})"
-                        >
-                            Ver
-                        </button>
-
-                        <button
-                            type="button"
-                            onclick="eliminarMaterialBiblioteca(${item.id})"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </article>
-
-            `)
-            .join("");
+            lista.appendChild(
+                elemento
+            );
+        }
+    );
 }
 
 
-function verMaterialBiblioteca(id) {
+function guardarEnBiblioteca(material) {
 
-    const materiales =
+    const biblioteca =
         obtenerBiblioteca();
 
-    const material =
-        materiales.find(
-            item => item.id === id
-        );
+    biblioteca.unshift({
+        id: Date.now(),
+        titulo:
+            material.titulo ||
+            "Nuevo material",
+        contenido:
+            material.contenido ||
+            "",
+        tipo:
+            material.tipo ||
+            "material",
+        fecha:
+            new Date().toISOString()
+    });
 
-    if (!material) {
-        return;
-    }
+    guardarBiblioteca(
+        biblioteca
+    );
 
-    const titulo =
-        $("biblioteca-contenido-titulo");
+    actualizarBiblioteca();
+}
 
-    const materia =
-        $("biblioteca-contenido-materia");
 
-    const contenido =
-        $("biblioteca-modal-contenido");
-
-    if (titulo) {
-        titulo.textContent =
-            material.titulo;
-    }
-
-    if (materia) {
-        materia.textContent =
-            material.materia;
-    }
-
-    if (contenido) {
-        contenido.innerHTML =
-            convertirTextoHTML(
-                material.texto
-            );
-    }
+function abrirContenidoBiblioteca(
+    material
+) {
 
     const modal =
         $("biblioteca-contenido-modal");
 
-    if (modal) {
-        modal.classList.remove("oculto");
+    if (!modal) {
+        return;
     }
+
+    const titulo =
+        modal.querySelector(
+            ".biblioteca-contenido-titulo"
+        );
+
+    const contenido =
+        modal.querySelector(
+            ".biblioteca-contenido"
+        );
+
+    if (titulo) {
+        titulo.textContent =
+            material.titulo ||
+            "Material";
+    }
+
+    if (contenido) {
+
+        contenido.innerHTML =
+            convertirTextoHTML(
+                material.contenido ||
+                ""
+            );
+    }
+
+    modal.classList.remove(
+        "oculto"
+    );
 }
 
 
@@ -1840,30 +1831,10 @@ function cerrarContenidoBiblioteca() {
         $("biblioteca-contenido-modal");
 
     if (modal) {
-        modal.classList.add("oculto");
+        modal.classList.add(
+            "oculto"
+        );
     }
-}
-
-
-function eliminarMaterialBiblioteca(id) {
-
-    if (
-        !confirm(
-            "¿Eliminar este material?"
-        )
-    ) {
-        return;
-    }
-
-    const materiales =
-        obtenerBiblioteca()
-            .filter(
-                item => item.id !== id
-            );
-
-    guardarBiblioteca(
-        materiales
-    );
 }
 
 
@@ -1889,62 +1860,27 @@ function guardarMaterias(materias) {
 }
 
 
-function crearMateria() {
+function abrirMaterias() {
 
-    const nombre =
-        prompt(
-            "Nombre de la nueva materia:"
+    mostrarApp();
+
+    ocultarVistasApp();
+
+    const pantalla =
+        $("materia-screen");
+
+    if (pantalla) {
+
+        pantalla.classList.remove(
+            "oculto"
         );
 
-    if (!nombre) {
-        return;
+        renderizarMaterias();
     }
-
-    const nombreLimpio =
-        nombre.trim();
-
-    if (!nombreLimpio) {
-        return;
-    }
-
-    const materias =
-        obtenerMaterias();
-
-    const existe =
-        materias.some(
-            materia =>
-                materia.nombre.toLowerCase() ===
-                nombreLimpio.toLowerCase()
-        );
-
-    if (existe) {
-
-        alert(
-            "Esa materia ya existe."
-        );
-
-        return;
-    }
-
-    materias.push({
-        id: Date.now(),
-        nombre: nombreLimpio,
-        progreso: 0,
-        contenidos: [],
-        fecha:
-            new Date().toISOString()
-    });
-
-    guardarMaterias(
-        materias
-    );
-
-    mostrarMaterias();
-    actualizarEstadisticasEstudio();
 }
 
 
-function mostrarMaterias() {
+function renderizarMaterias() {
 
     const lista =
         $("lista-materias");
@@ -1956,366 +1892,53 @@ function mostrarMaterias() {
     const materias =
         obtenerMaterias();
 
+    lista.innerHTML = "";
+
     if (!materias.length) {
 
-        lista.innerHTML = `
-            <div class="estudio-vacio">
-                <div>📖</div>
-                <h3>Todavía no tienes materias</h3>
-                <p>
-                    Crea tu primera materia para empezar a organizar tu estudio.
-                </p>
-
-                <button
-                    type="button"
-                    onclick="crearMateria()"
-                    class="estudio-btn-principal"
-                >
-                    Crear materia
-                </button>
-            </div>
-        `;
+        lista.innerHTML =
+            '<div class="studyai-empty">' +
+                '<h3>No hay materias todavía</h3>' +
+                '<p>Añade tus asignaturas para organizar tu estudio.</p>' +
+            '</div>';
 
         return;
     }
 
-    lista.innerHTML =
-        materias
-            .map(materia => `
+    materias.forEach(
+        function(materia) {
 
-                <article
-                    class="materia-item"
-                    onclick="abrirMateria(${materia.id})"
-                >
+            const elemento =
+                document.createElement("button");
 
-                    <div class="materia-item-icon">
-                        📚
-                    </div>
+            elemento.type =
+                "button";
 
-                    <div class="materia-item-info">
+            elemento.className =
+                "materia-item";
 
-                        <h3>
-                            ${escaparHTML(materia.nombre)}
-                        </h3>
+            elemento.textContent =
+                materia.nombre ||
+                "Materia";
 
-                        <p>
-                            ${
-                                (materia.contenidos || []).length
-                            } contenidos
-                        </p>
+            elemento.addEventListener(
+                "click",
+                function() {
 
-                    </div>
+                    materiaActual =
+                        materia;
 
-                    <div class="materia-item-progreso">
+                    abrirModoEstudio(
+                        materia
+                    );
+                }
+            );
 
-                        <strong>
-                            ${Number(materia.progreso || 0)}%
-                        </strong>
-
-                        <div class="progreso-barra">
-                            <span
-                                style="width:${Number(materia.progreso || 0)}%"
-                            ></span>
-                        </div>
-
-                    </div>
-
-                    <span>
-                        →
-                    </span>
-
-                </article>
-
-            `)
-            .join("");
-}
-
-
-function abrirMateria(id) {
-
-    const materias =
-        obtenerMaterias();
-
-    materiaActual =
-        materias.find(
-            materia => materia.id === id
-        );
-
-    if (!materiaActual) {
-        return;
-    }
-
-    ocultarVistasApp();
-
-    const pantalla =
-        $("materia-screen");
-
-    if (pantalla) {
-        pantalla.classList.remove("oculto");
-    }
-
-    const titulo =
-        $("materia-titulo");
-
-    if (titulo) {
-        titulo.textContent =
-            `📚 ${materiaActual.nombre}`;
-    }
-
-    actualizarMateriaUI();
-}
-
-
-function cerrarMateria() {
-
-    materiaActual = null;
-
-    const pantalla =
-        $("materia-screen");
-
-    if (pantalla) {
-        pantalla.classList.add("oculto");
-    }
-
-    abrirModoEstudio();
-}
-
-
-function actualizarMateriaUI() {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    const contenidos =
-        materiaActual.contenidos || [];
-
-    const contador =
-        $("materia-contenidos");
-
-    if (contador) {
-        contador.textContent =
-            contenidos.length;
-    }
-
-    const progreso =
-        $("materia-progreso");
-
-    if (progreso) {
-        progreso.textContent =
-            `${Number(materiaActual.progreso || 0)}%`;
-    }
-
-    const lista =
-        $("lista-contenido-materia");
-
-    if (!lista) {
-        return;
-    }
-
-    if (!contenidos.length) {
-
-        lista.innerHTML = `
-            <div class="estudio-vacio">
-                <div>📝</div>
-                <h3>Todavía no hay contenido</h3>
-                <p>
-                    Añade tus primeros apuntes para empezar.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    lista.innerHTML =
-        contenidos
-            .map(contenido => `
-
-                <article class="contenido-materia-item">
-
-                    <div>
-                        <strong>
-                            ${escaparHTML(contenido.titulo)}
-                        </strong>
-
-                        <small>
-                            ${formatearFecha(contenido.fecha)}
-                        </small>
-                    </div>
-
-                    <button
-                        type="button"
-                        onclick="verContenidoMateria(${contenido.id})"
-                    >
-                        Ver
-                    </button>
-
-                </article>
-
-            `)
-            .join("");
-}
-
-
-function agregarContenidoMateria() {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    const titulo =
-        prompt(
-            "Título del contenido:"
-        );
-
-    if (!titulo) {
-        return;
-    }
-
-    const texto =
-        prompt(
-            "Escribe o pega tus apuntes:"
-        );
-
-    if (!texto) {
-        return;
-    }
-
-    const materias =
-        obtenerMaterias();
-
-    const materia =
-        materias.find(
-            item =>
-                item.id === materiaActual.id
-        );
-
-    if (!materia) {
-        return;
-    }
-
-    if (!materia.contenidos) {
-        materia.contenidos = [];
-    }
-
-    materia.contenidos.push({
-        id: Date.now(),
-        titulo: titulo.trim(),
-        texto: texto.trim(),
-        fecha:
-            new Date().toISOString()
-    });
-
-    guardarMaterias(
-        materias
+            lista.appendChild(
+                elemento
+            );
+        }
     );
-
-    materiaActual = materia;
-
-    actualizarMateriaUI();
-    actualizarEstadisticasEstudio();
-}
-
-
-function verContenidoMateria(id) {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    const contenido =
-        (materiaActual.contenidos || [])
-            .find(item => item.id === id);
-
-    if (!contenido) {
-        return;
-    }
-
-    alert(
-        `${contenido.titulo}\n\n${contenido.texto}`
-    );
-}
-
-
-/* =========================================================
-   ACCIONES DE MATERIA
-   ========================================================= */
-
-function materiaFlashcards() {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    generarDesdeMateria(
-        "flashcards"
-    );
-}
-
-
-function materiaTest() {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    generarDesdeMateria(
-        "preguntas"
-    );
-}
-
-
-function materiaRepasar() {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    generarDesdeMateria(
-        "resumen"
-    );
-}
-
-
-async function generarDesdeMateria(tipo) {
-
-    if (!materiaActual) {
-        return;
-    }
-
-    const contenidos =
-        materiaActual.contenidos || [];
-
-    if (!contenidos.length) {
-
-        alert(
-            "Esta materia todavía no tiene contenido."
-        );
-
-        return;
-    }
-
-    const texto =
-        contenidos
-            .map(item =>
-                `${item.titulo}\n${item.texto}`
-            )
-            .join("\n\n");
-
-    const apuntes =
-        $("apuntes");
-
-    if (apuntes) {
-        apuntes.value = texto;
-    }
-
-    seleccionarModo(tipo);
-
-    mostrarApp();
-    ocultarVistasApp();
-
-    await generar();
 }
 
 
@@ -2323,21 +1946,29 @@ async function generarDesdeMateria(tipo) {
    MODO ESTUDIO
    ========================================================= */
 
-function abrirModoEstudio() {
+function abrirModoEstudio(
+    materia = null
+) {
 
     mostrarApp();
+
     ocultarVistasApp();
 
     const pantalla =
         $("modo-estudio");
 
-    if (pantalla) {
-        pantalla.classList.remove("oculto");
+    if (!pantalla) {
+        return;
     }
 
-    mostrarMaterias();
-    actualizarEstadisticasEstudio();
-    prepararRecomendacionEstudio();
+    pantalla.classList.remove(
+        "oculto"
+    );
+
+    if (materia) {
+        materiaActual =
+            materia;
+    }
 }
 
 
@@ -2347,358 +1978,936 @@ function cerrarModoEstudio() {
         $("modo-estudio");
 
     if (pantalla) {
-        pantalla.classList.add("oculto");
-    }
-}
-
-
-function obtenerDatosEstudio() {
-
-    return leerStorage(
-        STORAGE.estudio,
-        {
-            sesiones: 0,
-            racha: 0,
-            ultimoDia: null
-        }
-    );
-}
-
-
-function actualizarEstadisticasEstudio() {
-
-    const materias =
-        obtenerMaterias();
-
-    const sesiones =
-        obtenerSesiones();
-
-    const datos =
-        obtenerDatosEstudio();
-
-    const materiasElemento =
-        $("estudio-materias");
-
-    if (materiasElemento) {
-        materiasElemento.textContent =
-            materias.length;
-    }
-
-    const sesionesElemento =
-        $("estudio-sesiones");
-
-    if (sesionesElemento) {
-        sesionesElemento.textContent =
-            sesiones.length;
-    }
-
-    const rachaElemento =
-        $("estudio-racha");
-
-    if (rachaElemento) {
-        rachaElemento.textContent =
-            datos.racha || 0;
-    }
-
-    let progreso = 0;
-
-    if (materias.length) {
-
-        progreso =
-            Math.round(
-                materias.reduce(
-                    (total, materia) =>
-                        total +
-                        Number(
-                            materia.progreso || 0
-                        ),
-                    0
-                ) /
-                materias.length
-            );
-    }
-
-    const progresoElemento =
-        $("estudio-progreso");
-
-    if (progresoElemento) {
-        progresoElemento.textContent =
-            `${progreso}%`;
-    }
-}
-
-
-function prepararRecomendacionEstudio() {
-
-    const materias =
-        obtenerMaterias();
-
-    const titulo =
-        $("recomendacion-titulo");
-
-    const descripcion =
-        $("recomendacion-descripcion");
-
-    if (!materias.length) {
-
-        if (titulo) {
-            titulo.textContent =
-                "Crea tu primera materia";
-        }
-
-        if (descripcion) {
-            descripcion.textContent =
-                "Añade una materia para que StudyAI pueda recomendarte qué estudiar.";
-        }
-
-        return;
-    }
-
-    const materia =
-        materias
-            .slice()
-            .sort(
-                (a, b) =>
-                    Number(a.progreso || 0) -
-                    Number(b.progreso || 0)
-            )[0];
-
-    if (titulo) {
-        titulo.textContent =
-            `Repasa ${materia.nombre}`;
-    }
-
-    if (descripcion) {
-
-        descripcion.textContent =
-            materia.contenidos?.length
-                ? `Tienes ${materia.contenidos.length} contenidos. Es un buen momento para continuar avanzando.`
-                : "Añade contenido a esta materia para empezar a estudiarla.";
-    }
-}
-
-
-function ejecutarRecomendacionEstudio() {
-
-    const materias =
-        obtenerMaterias();
-
-    if (!materias.length) {
-
-        crearMateria();
-        return;
-    }
-
-    const materia =
-        materias
-            .slice()
-            .sort(
-                (a, b) =>
-                    Number(a.progreso || 0) -
-                    Number(b.progreso || 0)
-            )[0];
-
-    if (!materia.contenidos?.length) {
-
-        abrirMateria(materia.id);
-
-        return;
-    }
-
-    materiaActual = materia;
-
-    materiaRepasar();
-}
-
-
-function estudioRepasar() {
-
-    const materias =
-        obtenerMaterias();
-
-    if (!materias.length) {
-
-        crearMateria();
-        return;
-    }
-
-    abrirMateria(
-        materias[0].id
-    );
-}
-
-
-function estudioTest() {
-
-    const materias =
-        obtenerMaterias();
-
-    if (!materias.length) {
-
-        crearMateria();
-        return;
-    }
-
-    const materia =
-        materias.find(
-            item =>
-                item.contenidos?.length
+        pantalla.classList.add(
+            "oculto"
         );
-
-    if (!materia) {
-
-        alert(
-            "Añade contenido a una materia primero."
-        );
-
-        return;
     }
-
-    materiaActual =
-        materia;
-
-    materiaTest();
-}
-
-
-function estudioFlashcards() {
-
-    const materias =
-        obtenerMaterias();
-
-    if (!materias.length) {
-
-        crearMateria();
-        return;
-    }
-
-    const materia =
-        materias.find(
-            item =>
-                item.contenidos?.length
-        );
-
-    if (!materia) {
-
-        alert(
-            "Añade contenido a una materia primero."
-        );
-
-        return;
-    }
-
-    materiaActual =
-        materia;
-
-    materiaFlashcards();
 }
 
 
 /* =========================================================
-   UTILIDADES
+   GENERADOR DE VÍDEOS 3D
    ========================================================= */
 
-function formatearFecha(fecha) {
+let video3D = {
+    escena: null,
+    camara: null,
+    renderizador: null,
+    reloj: null,
+    animando: false,
+    iniciado: false,
+    frame: null,
+    duracion: 10,
+    tiempo: 0,
+    tipo: "cinematico",
+    formato: "16:9",
+    calidad: "1080p",
+    prompt: ""
+};
 
-    if (!fecha) {
-        return "";
+let video3DObjetos = [];
+
+
+function abrirGeneradorVideo() {
+
+    mostrarApp();
+
+    ocultarVistasApp();
+
+    const pantalla =
+        $("generador-video-screen");
+
+    if (!pantalla) {
+
+        console.warn(
+            "No existe generador-video-screen."
+        );
+
+        return;
+    }
+
+    pantalla.classList.remove(
+        "oculto"
+    );
+
+    actualizarContadorVideoPrompt();
+
+    inicializarMotorVideo3D();
+}
+
+
+function cerrarGeneradorVideo() {
+
+    const pantalla =
+        $("generador-video-screen");
+
+    if (pantalla) {
+        pantalla.classList.add(
+            "oculto"
+        );
+    }
+
+    pausarVideoPreview();
+}
+
+
+async function cargarThreeJS() {
+
+    if (window.THREE) {
+        return window.THREE;
     }
 
     try {
 
-        return new Date(fecha)
-            .toLocaleDateString(
-                "es-ES",
-                {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric"
-                }
+        const THREE =
+            await import(
+                "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
             );
 
-    } catch (_) {
+        window.THREE =
+            THREE;
 
-        return "";
+        return THREE;
+
+    } catch (error) {
+
+        console.error(
+            "No se pudo cargar Three.js:",
+            error
+        );
+
+        throw new Error(
+            "No se pudo cargar el motor 3D."
+        );
     }
 }
 
 
-function escaparHTML(valor) {
+async function inicializarMotorVideo3D() {
 
-    return String(valor ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    const contenedor =
+        $("video-preview");
+
+    if (!contenedor) {
+        return;
+    }
+
+    if (video3D.iniciado) {
+
+        redimensionarVideo3D();
+
+        return;
+    }
+
+    try {
+
+        await cargarThreeJS();
+
+        crearEscenaVideo3D(
+            contenedor
+        );
+
+        video3D.iniciado =
+            true;
+
+    } catch (error) {
+
+        console.error(
+            "Error inicializando Three.js:",
+            error
+        );
+    }
 }
 
 
+function crearEscenaVideo3D(
+    contenedor
+) {
 
-/* =========================================================
-   MEJORAS DE INTERACCIÓN
-   ========================================================= */
+    const THREE =
+        window.THREE;
 
-function configurarArchivos() {
-    const zona = document.querySelector(".archivos-studyai");
-    const input = document.querySelector("#archivos-input, #archivo-input, input[type='file']");
+    if (!THREE) {
+        return;
+    }
 
-    if (!zona || !input) return;
+    contenedor.innerHTML = "";
 
-    zona.addEventListener("dragover", event => {
-        event.preventDefault();
-        zona.classList.add("arrastrando");
-    });
+    const escena =
+        new THREE.Scene();
 
-    zona.addEventListener("dragleave", () => {
-        zona.classList.remove("arrastrando");
-    });
+    escena.background =
+        new THREE.Color(
+            0x101116
+        );
 
-    zona.addEventListener("drop", event => {
-        event.preventDefault();
-        zona.classList.remove("arrastrando");
+    const camara =
+        new THREE.PerspectiveCamera(
+            55,
+            contenedor.clientWidth /
+                Math.max(
+                    contenedor.clientHeight,
+                    1
+                ),
+            0.1,
+            1000
+        );
 
-        const archivos = event.dataTransfer?.files;
-        if (!archivos?.length) return;
+    camara.position.set(
+        8,
+        5,
+        10
+    );
 
-        seleccionarArchivos({ target: { files: archivos, value: "" } });
-    });
+    const renderizador =
+        new THREE.WebGLRenderer({
+            antialias: true
+        });
+
+    renderizador.setPixelRatio(
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        )
+    );
+
+    renderizador.setSize(
+        contenedor.clientWidth,
+        contenedor.clientHeight
+    );
+
+    renderizador.shadowMap.enabled =
+        true;
+
+    contenedor.appendChild(
+        renderizador.domElement
+    );
+
+    const luz =
+        new THREE.HemisphereLight(
+            0xffffff,
+            0x222222,
+            2
+        );
+
+    escena.add(luz);
+
+    const luzDireccional =
+        new THREE.DirectionalLight(
+            0xffffff,
+            3
+        );
+
+    luzDireccional.position.set(
+        5,
+        10,
+        5
+    );
+
+    luzDireccional.castShadow =
+        true;
+
+    escena.add(
+        luzDireccional
+    );
+
+    const suelo =
+        new THREE.Mesh(
+            new THREE.PlaneGeometry(
+                100,
+                100
+            ),
+            new THREE.MeshStandardMaterial({
+                color: 0x22252b
+            })
+        );
+
+    suelo.rotation.x =
+        -Math.PI / 2;
+
+    suelo.receiveShadow =
+        true;
+
+    escena.add(
+        suelo
+    );
+
+    video3D.escena =
+        escena;
+
+    video3D.camara =
+        camara;
+
+    video3D.renderizador =
+        renderizador;
+
+    video3D.reloj =
+        new THREE.Clock();
+
+    redimensionarVideo3D();
+
+    animarVideo3D();
 }
 
-function cerrarModalesConEscape(event) {
-    if (event.key !== "Escape") return;
 
-    [
-        "biblioteca-modal",
-        "biblioteca-contenido-modal",
-        "planes-modal"
-    ].forEach(id => {
-        const elemento = $(id);
-        if (elemento) elemento.classList.add("oculto");
-    });
+function redimensionarVideo3D() {
+
+    if (
+        !video3D.camara ||
+        !video3D.renderizador
+    ) {
+        return;
+    }
+
+    const contenedor =
+        $("video-preview");
+
+    if (!contenedor) {
+        return;
+    }
+
+    const ancho =
+        Math.max(
+            contenedor.clientWidth,
+            1
+        );
+
+    const alto =
+        Math.max(
+            contenedor.clientHeight,
+            1
+        );
+
+    video3D.camara.aspect =
+        ancho / alto;
+
+    video3D.camara.updateProjectionMatrix();
+
+    video3D.renderizador.setSize(
+        ancho,
+        alto
+    );
 }
 
-function inicializarStudyAI() {
-    seleccionarModo(modoActual);
 
-    const busquedaSesiones = $("buscar-sesiones");
-    const filtroSesiones = $("filtro-sesiones");
-    const busquedaBiblioteca = $("biblioteca-busqueda");
+function animarVideo3D() {
 
-    busquedaSesiones?.addEventListener("input", mostrarSesiones);
-    filtroSesiones?.addEventListener("change", mostrarSesiones);
-    busquedaBiblioteca?.addEventListener("input", mostrarBiblioteca);
+    if (
+        !video3D.renderizador ||
+        !video3D.escena ||
+        !video3D.camara
+    ) {
+        return;
+    }
 
-    document.addEventListener("keydown", cerrarModalesConEscape);
-    configurarArchivos();
+    video3D.frame =
+        requestAnimationFrame(
+            animarVideo3D
+        );
 
-    mostrarArchivosSeleccionados();
-    mostrarSesiones();
-    actualizarBiblioteca();
-    mostrarMaterias();
-    comprobarUsuario();
+    const delta =
+        video3D.reloj
+            ? video3D.reloj.getDelta()
+            : 0.016;
 
-    console.log("StudyAI: interfaz inicializada correctamente.");
+    if (video3D.animando) {
+
+        video3D.tiempo +=
+            delta;
+
+        if (
+            video3D.tiempo >=
+            video3D.duracion
+        ) {
+
+            video3D.tiempo =
+                video3D.duracion;
+
+            video3D.animando =
+                false;
+        }
+
+        actualizarTimelineVideo();
+    }
+
+    video3D.renderizador.render(
+        video3D.escena,
+        video3D.camara
+    );
+}
+
+
+function construirEscenaDesdePrompt(
+    prompt
+) {
+
+    const THREE =
+        window.THREE;
+
+    if (
+        !THREE ||
+        !video3D.escena
+    ) {
+        return;
+    }
+
+    limpiarEscenaVideo3D();
+
+    const texto =
+        prompt.toLowerCase();
+
+    if (
+        texto.includes("tren")
+    ) {
+
+        crearTrenVideo3D();
+
+    } else if (
+        texto.includes("ciudad") ||
+        texto.includes("edificios")
+    ) {
+
+        crearCiudadVideo3D();
+
+    } else {
+
+        crearCiudadVideo3D();
+    }
+
+    if (
+        texto.includes("nieve")
+    ) {
+
+        crearNieveVideo3D();
+    }
+
+    video3D.prompt =
+        prompt;
+}
+
+
+function limpiarEscenaVideo3D() {
+
+    video3DObjetos.forEach(
+        function(objeto) {
+
+            if (
+                objeto.parent
+            ) {
+
+                objeto.parent.remove(
+                    objeto
+                );
+            }
+        }
+    );
+
+    video3DObjetos = [];
+}
+
+
+function crearCiudadVideo3D() {
+
+    const THREE =
+        window.THREE;
+
+    if (!THREE) {
+        return;
+    }
+
+    for (
+        let i = 0;
+        i < 12;
+        i++
+    ) {
+
+        const altura =
+            2 +
+            Math.random() * 7;
+
+        const edificio =
+            new THREE.Mesh(
+                new THREE.BoxGeometry(
+                    2,
+                    altura,
+                    2
+                ),
+                new THREE.MeshStandardMaterial({
+                    color:
+                        0x30343c
+                })
+            );
+
+        const x =
+            (i % 4) * 4 - 6;
+
+        const z =
+            Math.floor(i / 4) * -4;
+
+        edificio.position.set(
+            x,
+            altura / 2,
+            z
+        );
+
+        edificio.castShadow =
+            true;
+
+        edificio.receiveShadow =
+            true;
+
+        video3D.escena.add(
+            edificio
+        );
+
+        video3DObjetos.push(
+            edificio
+        );
+    }
+}
+
+
+function crearTrenVideo3D() {
+
+    const THREE =
+        window.THREE;
+
+    if (!THREE) {
+        return;
+    }
+
+    const tren =
+        new THREE.Group();
+
+    const cuerpo =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                5,
+                1.5,
+                2
+            ),
+            new THREE.MeshStandardMaterial({
+                color: 0x7b2020
+            })
+        );
+
+    cuerpo.position.y =
+        1.2;
+
+    tren.add(
+        cuerpo
+    );
+
+    for (
+        let i = 0;
+        i < 4;
+        i++
+    ) {
+
+        const rueda =
+            new THREE.Mesh(
+                new THREE.CylinderGeometry(
+                    0.5,
+                    0.5,
+                    0.35,
+                    24
+                ),
+                new THREE.MeshStandardMaterial({
+                    color: 0x151515
+                })
+            );
+
+        rueda.rotation.z =
+            Math.PI / 2;
+
+        rueda.position.set(
+            -1.5 + i,
+            0.5,
+            1.05
+        );
+
+        tren.add(
+            rueda
+        );
+    }
+
+    tren.position.set(
+        0,
+        0,
+        4
+    );
+
+    video3D.escena.add(
+        tren
+    );
+
+    video3DObjetos.push(
+        tren
+    );
+}
+
+
+function crearNieveVideo3D() {
+
+    const THREE =
+        window.THREE;
+
+    if (!THREE) {
+        return;
+    }
+
+    const grupo =
+        new THREE.Group();
+
+    const geometria =
+        new THREE.SphereGeometry(
+            0.035,
+            6,
+            6
+        );
+
+    const material =
+        new THREE.MeshBasicMaterial({
+            color: 0xffffff
+        });
+
+    for (
+        let i = 0;
+        i < 500;
+        i++
+    ) {
+
+        const particula =
+            new THREE.Mesh(
+                geometria,
+                material
+            );
+
+        particula.position.set(
+            (Math.random() - 0.5) * 30,
+            Math.random() * 15,
+            (Math.random() - 0.5) * 30
+        );
+
+        grupo.add(
+            particula
+        );
+    }
+
+    video3D.escena.add(
+        grupo
+    );
+
+    video3DObjetos.push(
+        grupo
+    );
+}
+
+
+async function generarVideo3D() {
+
+    const prompt =
+        $("video-prompt");
+
+    if (!prompt) {
+        return;
+    }
+
+    const texto =
+        prompt.value.trim();
+
+    if (!texto) {
+
+        alert(
+            "Describe primero el vídeo que quieres crear."
+        );
+
+        prompt.focus();
+
+        return;
+    }
+
+    video3D.prompt =
+        texto;
+
+    video3D.duracion =
+        Number(
+            $("video-duracion")?.value ||
+            10
+        );
+
+    video3D.calidad =
+        $("video-calidad")?.value ||
+        "1080p";
+
+    try {
+
+        if (!video3D.iniciado) {
+
+            await inicializarMotorVideo3D();
+        }
+
+        construirEscenaDesdePrompt(
+            texto
+        );
+
+        const titulo =
+            $("video-escena-titulo");
+
+        if (titulo) {
+
+            titulo.textContent =
+                "Escena generada";
+        }
+
+        video3D.tiempo =
+            0;
+
+        const timeline =
+            $("video-timeline");
+
+        if (timeline) {
+
+            timeline.max =
+                video3D.duracion;
+
+            timeline.value =
+                0;
+        }
+
+        actualizarTimelineVideo();
+
+        reiniciarVideoPreview();
+
+        console.log(
+            "StudyAI: vídeo 3D generado."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Error generando vídeo 3D:",
+            error
+        );
+
+        alert(
+            "No se pudo generar la escena 3D."
+        );
+    }
+}
+
+
+function reproducirVideoPreview() {
+
+    video3D.animando =
+        true;
+}
+
+
+function pausarVideoPreview() {
+
+    video3D.animando =
+        false;
+}
+
+
+function reiniciarVideoPreview() {
+
+    video3D.tiempo =
+        0;
+
+    video3D.animando =
+        false;
+
+    actualizarTimelineVideo();
+}
+
+
+function actualizarTimelineVideo() {
+
+    const timeline =
+        $("video-timeline");
+
+    const actual =
+        $("video-tiempo-actual");
+
+    const total =
+        $("video-tiempo-total");
+
+    if (timeline) {
+        timeline.value =
+            video3D.tiempo;
+    }
+
+    if (actual) {
+        actual.textContent =
+            formatearTiempoVideo(
+                video3D.tiempo
+            );
+    }
+
+    if (total) {
+        total.textContent =
+            formatearTiempoVideo(
+                video3D.duracion
+            );
+    }
+}
+
+
+function formatearTiempoVideo(
+    segundos
+) {
+
+    const total =
+        Math.max(
+            0,
+            Math.floor(
+                Number(segundos) || 0
+            )
+        );
+
+    const minutos =
+        Math.floor(
+            total / 60
+        );
+
+    const segundosRestantes =
+        total % 60;
+
+    return (
+        String(minutos).padStart(2, "0") +
+        ":" +
+        String(
+            segundosRestantes
+        ).padStart(2, "0")
+    );
+}
+
+
+function seleccionarTipoVideo(
+    tipo,
+    boton
+) {
+
+    video3D.tipo =
+        tipo;
+
+    document
+        .querySelectorAll(
+            "[data-video-tipo]"
+        )
+        .forEach(
+            function(elemento) {
+
+                elemento.classList.remove(
+                    "activo"
+                );
+            }
+        );
+
+    if (boton) {
+        boton.classList.add(
+            "activo"
+        );
+    }
+}
+
+
+function seleccionarFormatoVideo(
+    formato,
+    boton
+) {
+
+    video3D.formato =
+        formato;
+
+    document
+        .querySelectorAll(
+            "[data-video-formato]"
+        )
+        .forEach(
+            function(elemento) {
+
+                elemento.classList.remove(
+                    "activo"
+                );
+            }
+        );
+
+    if (boton) {
+        boton.classList.add(
+            "activo"
+        );
+    }
+}
+
+
+function actualizarContadorVideoPrompt() {
+
+    const prompt =
+        $("video-prompt");
+
+    const contador =
+        $("video-prompt-contador");
+
+    if (!prompt || !contador) {
+        return;
+    }
+
+    contador.textContent =
+        prompt.value.length +
+        "/1000";
+}
+
+
+function usarPromptVideo(
+    texto
+) {
+
+    const prompt =
+        $("video-prompt");
+
+    if (!prompt) {
+        return;
+    }
+
+    prompt.value =
+        texto;
+
+    actualizarContadorVideoPrompt();
+
+    prompt.focus();
+}
+
+
+function pantallaCompletaVideo() {
+
+    const preview =
+        $("video-preview");
+
+    if (!preview) {
+        return;
+    }
+
+    if (
+        document.fullscreenElement
+    ) {
+
+        document.exitFullscreen();
+
+    } else {
+
+        preview.requestFullscreen();
+    }
+}
+
+
+function descargarVideoGenerado() {
+
+    alert(
+        "La exportación de vídeo está preparada para una fase posterior. Actualmente puedes previsualizar la escena 3D."
+    );
 }
 
 
@@ -2706,83 +2915,134 @@ function inicializarStudyAI() {
    EVENTOS
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", inicializarStudyAI);
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        console.log(
+            "StudyAI: DOM cargado."
+        );
+
+        const prompt =
+            $("video-prompt");
+
+        if (prompt) {
+
+            prompt.addEventListener(
+                "input",
+                actualizarContadorVideoPrompt
+            );
+        }
+
+        window.addEventListener(
+            "resize",
+            redimensionarVideo3D
+        );
+
+        comprobarUsuario();
+        mostrarSesiones();
+        actualizarBiblioteca();
+    }
+);
 
 
 /* =========================================================
-   HACER FUNCIONES DISPONIBLES PARA EL HTML
+   EXPONER FUNCIONES PARA index.html
    ========================================================= */
 
-window.abrirStudyAI = abrirStudyAI;
-window.volverInicio = volverInicio;
+window.abrirStudyAI =
+    abrirStudyAI;
 
-window.mostrarLogin = mostrarLogin;
-window.iniciarSesionGoogle = iniciarSesionGoogle;
-window.volverStudyAI = volverStudyAI;
+window.volverInicio =
+    volverInicio;
 
-window.abrirPerfil = abrirPerfil;
-window.cerrarPerfil = cerrarPerfil;
-window.editarPerfil = editarPerfil;
-window.cerrarEditarPerfil = cerrarEditarPerfil;
-window.guardarPerfil = guardarPerfil;
+window.mostrarLogin =
+    mostrarLogin;
 
-window.cerrarPublicidad = cerrarPublicidad;
-window.mostrarPublicidad = mostrarPublicidad;
+window.volverStudyAI =
+    volverStudyAI;
 
-window.seleccionarModo = seleccionarModo;
+window.iniciarSesionGoogle =
+    iniciarSesionGoogle;
 
-window.obtenerTipoArchivo = obtenerTipoArchivo;
+window.abrirPerfil =
+    abrirPerfil;
 
-window.seleccionarArchivos = seleccionarArchivos;
-window.eliminarArchivo = eliminarArchivo;
+window.cerrarPerfil =
+    cerrarPerfil;
 
-window.generar = generar;
-window.guardarSesion = guardarSesion;
-window.nuevaSesion = nuevaSesion;
+window.editarPerfil =
+    editarPerfil;
 
-window.abrirSesion = abrirSesion;
-window.eliminarSesion = eliminarSesion;
+window.cerrarEditarPerfil =
+    cerrarEditarPerfil;
 
-window.abrirBiblioteca = abrirBiblioteca;
-window.abrirBibliotecaAgregar = abrirBibliotecaAgregar;
-window.cerrarBibliotecaAgregar = cerrarBibliotecaAgregar;
-window.guardarMaterialBiblioteca = guardarMaterialBiblioteca;
-window.filtrarBiblioteca = filtrarBiblioteca;
-window.verMaterialBiblioteca = verMaterialBiblioteca;
-window.cerrarContenidoBiblioteca = cerrarContenidoBiblioteca;
-window.eliminarMaterialBiblioteca =
-    eliminarMaterialBiblioteca;
+window.guardarPerfil =
+    guardarPerfil;
 
-window.crearMateria = crearMateria;
-window.abrirMateria = abrirMateria;
-window.cerrarMateria = cerrarMateria;
-window.agregarContenidoMateria =
-    agregarContenidoMateria;
-window.verContenidoMateria =
-    verContenidoMateria;
+window.cerrarPublicidad =
+    cerrarPublicidad;
 
-window.materiaFlashcards =
-    materiaFlashcards;
-window.materiaTest =
-    materiaTest;
-window.materiaRepasar =
-    materiaRepasar;
+window.mostrarPublicidad =
+    mostrarPublicidad;
+
+window.seleccionarModo =
+    seleccionarModo;
+
+window.seleccionarArchivos =
+    seleccionarArchivos;
+
+window.eliminarArchivo =
+    eliminarArchivo;
+
+window.generar =
+    generar;
+
+window.abrirBiblioteca =
+    abrirBiblioteca;
+
+window.cerrarBiblioteca =
+    cerrarBiblioteca;
 
 window.abrirModoEstudio =
     abrirModoEstudio;
+
 window.cerrarModoEstudio =
     cerrarModoEstudio;
 
-window.ejecutarRecomendacionEstudio =
-    ejecutarRecomendacionEstudio;
+window.abrirGeneradorVideo =
+    abrirGeneradorVideo;
 
-window.estudioRepasar =
-    estudioRepasar;
-window.estudioTest =
-    estudioTest;
-window.estudioFlashcards =
-    estudioFlashcards;
+window.cerrarGeneradorVideo =
+    cerrarGeneradorVideo;
+
+window.generarVideo3D =
+    generarVideo3D;
+
+window.reproducirVideoPreview =
+    reproducirVideoPreview;
+
+window.pausarVideoPreview =
+    pausarVideoPreview;
+
+window.reiniciarVideoPreview =
+    reiniciarVideoPreview;
+
+window.pantallaCompletaVideo =
+    pantallaCompletaVideo;
+
+window.seleccionarTipoVideo =
+    seleccionarTipoVideo;
+
+window.seleccionarFormatoVideo =
+    seleccionarFormatoVideo;
+
+window.usarPromptVideo =
+    usarPromptVideo;
+
+window.descargarVideoGenerado =
+    descargarVideoGenerado;
 
 console.log(
-    "StudyAI: todas las funciones cargadas."
+    "StudyAI: funciones globales preparadas."
 );

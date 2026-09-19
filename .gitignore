@@ -8,7 +8,7 @@ server/.env
 *.db-shm
 *.db-wal
 
-# Archivos temporales
+# Logs y archivos del sistema
 .DS_Store
 *.log
 
@@ -17,10 +17,10 @@ backup/
 *.backup
 *.backup-*
 *.save
-# Copias de seguridad
+
+# Backups con nombres específicos
+index-backup.html
+script-backup.js
+# Cualquier archivo de copia de seguridad
 *backup*
 *.save
-
-server/*backup*
-server/*.save
-server/server.before-database.js

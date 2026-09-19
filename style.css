@@ -3446,4 +3446,212 @@ main > .card:first-of-type::after {
     .sesion-descripcion {
         max-width: 100%;
     }
+css
+/* =========================================================
+   CABECERA PRINCIPAL STUDYAI
+   ========================================================= */
+
+.app-header {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    padding: 24px 40px 20px;
+    box-sizing: border-box;
 }
+
+
+/* CONTENIDO CENTRAL */
+
+.app-header-contenido {
+    text-align: center;
+    padding: 10px 0 18px;
+}
+
+.app-header-contenido p {
+    margin: 0;
+    color: #777777;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   USUARIO
+   ========================================================= */
+
+.usuario-header {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* BOTÓN INICIAR SESIÓN */
+
+.login-header-button {
+    border: none;
+    background: transparent;
+    color: #555555;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 9px 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.login-header-button:hover {
+    background: #f5f5f5;
+}
+
+
+/* PERFIL */
+
+.perfil-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    border: 1px solid #e8e8e8;
+    background: #ffffff;
+
+    padding: 6px 11px 6px 6px;
+    border-radius: 999px;
+
+    cursor: pointer;
+    font-family: inherit;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.perfil-header:hover {
+    background: #fafafa;
+    border-color: #dcdcdc;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+/* FOTO */
+
+#foto-usuario-header {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    background: #f2f2f2;
+}
+
+
+/* NOMBRE */
+
+#nombre-usuario-header {
+    color: #222222;
+    font-size: 14px;
+    font-weight: 600;
+    max-width: 130px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* FLECHA */
+
+.perfil-flecha {
+    color: #888888;
+    font-size: 13px;
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+
+.studyai-navegacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* BOTONES */
+
+.home-button {
+    border: 1px solid #e8e8e8;
+    background: #ffffff;
+
+    color: #333333;
+
+    padding: 9px 15px;
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.home-button:hover {
+    background: #f7f7f7;
+    border-color: #dddddd;
+}
+
+
+/* =========================================================
+   ELIMINAR LOGO DE LA CABECERA DE LA IA
+   ========================================================= */
+
+.logo-header {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .app-header {
+        padding: 75px 18px 18px;
+    }
+
+    .usuario-header {
+        top: 15px;
+        right: 18px;
+    }
+
+    .login-header-button {
+        font-size: 12px;
+    }
+
+    #nombre-usuario-header {
+        max-width: 90px;
+    }
+
+    .app-header-contenido {
+        padding-bottom: 15px;
+    }
+
+    .studyai-navegacion {
+        justify-content: flex-start;
+        overflow-x: auto;
