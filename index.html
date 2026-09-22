@@ -2,486 +2,975 @@
 <html lang="es">
 
 <head>
-    <meta name="google-site-verification" content="6KPM_WpRlrOUOXo08uar77Rl1C_hrHDON7mqhDo-aqo" />
+    <!-- SEO STUDYAI -->
+<title>StudyAI — Estudia mejor con inteligencia artificial</title>
 
-    <meta charset="UTF-8">
+<meta name="description" content="StudyAI es una plataforma de estudio con inteligencia artificial para crear resúmenes, preguntas, exámenes y flashcards. Estudia mejor y aprende más rápido.">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta name="keywords" content="StudyAI, estudio, inteligencia artificial, estudiar, resúmenes, preguntas, exámenes, flashcards">
 
-    <title>StudyAI — Estudia mejor. Aprende más rápido.</title>
-    <meta
-    name="description"
-    content="StudyAI convierte tus apuntes en resúmenes, preguntas, flashcards y exámenes con inteligencia artificial."
->
+<meta name="author" content="StudyAI">
 
 <meta name="robots" content="index, follow">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
+<link rel="canonical" href="https://studyai-1-v9jt.onrender.com/">
+
+<link rel="icon" type="image/png" href="/images/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="StudyAI — Estudia mejor con inteligencia artificial">
+<meta property="og:description" content="Crea resúmenes, preguntas, exámenes y flashcards utilizando inteligencia artificial.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://studyai-1-v9jt.onrender.com/">
+<meta property="og:site_name" content="StudyAI">
+
+<!-- Datos estructurados -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "StudyAI",
+  "description": "Plataforma de estudio con inteligencia artificial para crear resúmenes, preguntas, exámenes y flashcards.",
+  "url": "https://studyai-1-v9jt.onrender.com/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web"
+}
+</script>
+    <meta charset="UTF-8">
+
+    <meta name="google-site-verification"
+        content="6KPM_WpRlrOUOXo08uar77Rl1C_hrHDON7mqhDo-aqo">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyAI — Estudia mejor. Aprende más rápido.</title>
+
+    <meta
+        name="description"
+        content="StudyAI convierte tus apuntes en resúmenes, preguntas, flashcards y exámenes con inteligencia artificial."
     >
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="/style.css"
-    >
-
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 
 <body>
 
 
-    <!-- =========================================================
-         PANTALLA DE INICIO
-         ========================================================= -->
+<!-- =========================================================
+     INICIO
+========================================================= -->
 
-    <section
-        id="inicio"
-        class="inicio"
-    >
+<section id="inicio" class="inicio">
 
-        <div class="inicio-contenido">
+    <div class="inicio-contenido">
 
-            <div class="logo">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Logo de StudyAI">
+        </div>
 
-                <img
-                    src="/images/logo.png"
-                    alt="Logo de StudyAI"
-                >
+        <h1>StudyAI</h1>
 
-            </div>
+        <p>
+            Estudia mejor. Aprende más rápido.
+        </p>
+
+        <p class="descripcion">
+            Convierte tus apuntes en resúmenes, preguntas,
+            flashcards y exámenes con inteligencia artificial.
+            StudyAI te ayuda a estudiar de forma más rápida,
+            organizada y sencilla.
+        </p>
+
+        <button
+            type="button"
+            class="start-button"
+            onclick="abrirStudyAI()"
+        >
+            Empezar a estudiar
+        </button>
+
+    </div>
+
+</section>
 
 
-            <h1>
-                StudyAI
-            </h1>
 
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<section id="login-screen" class="login-screen oculto">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            <img src="/images/logo.png" alt="Logo StudyAI">
+        </div>
+
+        <h1>Bienvenido a StudyAI</h1>
+
+        <p class="login-subtitle">
+            Inicia sesión para utilizar StudyAI.
+        </p>
+
+        <div class="login-buttons">
+
+            <button
+                type="button"
+                class="login-button google"
+                onclick="iniciarSesionGoogle()"
+            >
+                <span class="login-icon">G</span>
+                Continuar con Google
+            </button>
+
+        </div>
+
+        <p class="login-info">
+            Necesitas iniciar sesión para utilizar
+            las funciones de inteligencia artificial.
+        </p>
+
+        <button
+            type="button"
+            class="volver-login"
+            onclick="volverStudyAI()"
+        >
+            ← Volver a StudyAI
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EDITAR PERFIL
+========================================================= -->
+
+<section
+    id="editar-perfil-screen"
+    class="perfil-screen oculto"
+>
+
+    <div class="perfil-card">
+
+        <button
+            type="button"
+            class="perfil-volver"
+            onclick="cerrarEditarPerfil()"
+        >
+            ← Volver
+        </button>
+
+        <h1>Editar perfil</h1>
+
+        <div class="editar-perfil-form">
+
+            <label for="editar-username">
+                Nombre de usuario
+            </label>
+
+            <input
+                type="text"
+                id="editar-username"
+                placeholder="Tu nombre de usuario"
+                maxlength="20"
+                autocomplete="username"
+            >
+
+
+            <label for="editar-biografia">
+                Biografía
+            </label>
+
+            <textarea
+                id="editar-biografia"
+                placeholder="Cuéntanos algo sobre ti..."
+                maxlength="160"
+            ></textarea>
+
+
+            <label for="editar-curso">
+                Curso
+            </label>
+
+            <select id="editar-curso">
+
+                <option value="">
+                    Selecciona tu curso
+                </option>
+
+                <option value="1 ESO">1º ESO</option>
+                <option value="2 ESO">2º ESO</option>
+                <option value="3 ESO">3º ESO</option>
+                <option value="4 ESO">4º ESO</option>
+                <option value="1 Bachillerato">1º Bachillerato</option>
+                <option value="2 Bachillerato">2º Bachillerato</option>
+
+            </select>
+
+
+            <label for="editar-asignaturas">
+                Asignaturas
+            </label>
+
+            <input
+                type="text"
+                id="editar-asignaturas"
+                placeholder="Ej: Matemáticas, Historia, Física"
+                maxlength="300"
+            >
+
+
+            <button
+                type="button"
+                class="guardar-perfil"
+                onclick="guardarPerfil()"
+            >
+                Guardar cambios
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     APLICACIÓN
+========================================================= -->
+
+<div id="app" class="app oculto">
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="app-header">
+
+        <div class="app-header-contenido">
 
             <p>
-                Estudia mejor. Aprende más rápido.
+                Convierte tus apuntes en herramientas para estudiar.
             </p>
-
-
-            <p class="descripcion">
-    Convierte tus apuntes en resúmenes, preguntas,
-    flashcards y exámenes con inteligencia artificial.
-    StudyAI te ayuda a estudiar de forma más rápida,
-    organizada y sencilla.
-</p>
-
-            <button
-                type="button"
-                class="start-button"
-                onclick="abrirStudyAI()"
-            >
-                Empezar a estudiar
-            </button>
 
         </div>
 
-    </section>
+
+        <nav class="studyai-navegacion">
+
+            <button
+                type="button"
+                class="home-button"
+                onclick="volverInicio()"
+            >
+                Inicio
+            </button>
+
+
+            <button
+                type="button"
+                class="home-button"
+                onclick="abrirBiblioteca()"
+            >
+                Biblioteca
+            </button>
+
+
+            <button
+                type="button"
+                class="home-button"
+                onclick="abrirGeneradorVideo()"
+            >
+                Generador de Vídeos
+            </button>
+
+        </nav>
+
+    </header>
 
 
 
-    <!-- =========================================================
-         LOGIN
-         ========================================================= -->
+    <!-- =====================================================
+         PUBLICIDAD
+    ===================================================== -->
 
     <section
-        id="login-screen"
-        class="login-screen oculto"
+        id="studyai-publicidad"
+        class="studyai-publicidad oculto"
+        aria-label="Publicidad"
     >
 
-        <div class="login-card">
+        <div class="publicidad-contenido">
 
-
-            <div class="login-logo">
-
-                <img
-                    src="/images/logo.png"
-                    alt="Logo StudyAI"
-                >
-
+            <div class="publicidad-etiqueta">
+                PATROCINADO
             </div>
 
-
-            <h1>
-                Bienvenido a StudyAI
-            </h1>
-
-
-            <p class="login-subtitle">
-                Inicia sesión para utilizar StudyAI.
-            </p>
-
-
-            <div class="login-buttons">
-
-                <button
-                    type="button"
-                    class="login-button google"
-                    onclick="iniciarSesionGoogle()"
-                >
-
-                    <span class="login-icon">
-                        G
-                    </span>
-
-                    Continuar con Google
-
-                </button>
-
-            </div>
-
-
-            <p class="login-info">
-                Necesitas iniciar sesión para utilizar
-                las funciones de inteligencia artificial.
-            </p>
-
-
-            <button
-                type="button"
-                class="volver-login"
-                onclick="volverStudyAI()"
+            <div
+                class="publicidad-logo"
+                id="publicidad-logo"
             >
-                ← Volver a StudyAI
-            </button>
+                📢
+            </div>
+
+            <div class="publicidad-texto">
+
+                <h3 id="publicidad-titulo">
+                    Descubre una nueva oportunidad
+                </h3>
+
+                <p id="publicidad-descripcion">
+                    Un servicio pensado para estudiantes.
+                </p>
+
+            </div>
+
+            <a
+                id="publicidad-boton"
+                class="publicidad-boton"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Saber más →
+            </a>
 
         </div>
+
+
+        <button
+            type="button"
+            class="publicidad-cerrar"
+            onclick="cerrarPublicidad()"
+            aria-label="Cerrar publicidad"
+        >
+            ×
+        </button>
 
     </section>
 
 
 
-    <!-- =========================================================
-         EDITAR PERFIL
-         ========================================================= -->
+    <!-- =====================================================
+         BIBLIOTECA
+    ===================================================== -->
 
     <section
-        id="editar-perfil-screen"
-        class="perfil-screen oculto"
+        id="biblioteca-screen"
+        class="biblioteca-screen oculto"
     >
 
-        <div class="perfil-card">
+        <div class="biblioteca-header">
 
+            <div>
 
-            <button
-                type="button"
-                class="perfil-volver"
-                onclick="cerrarEditarPerfil()"
-            >
-                ← Volver
-            </button>
-
-
-            <h1>
-                Editar perfil
-            </h1>
-
-
-            <div class="editar-perfil-form">
-
-
-                <label for="editar-username">
-                    Nombre de usuario
-                </label>
-
-
-                <input
-                    type="text"
-                    id="editar-username"
-                    placeholder="Tu nombre de usuario"
-                    maxlength="20"
-                    autocomplete="username"
-                >
-
-
-                <label for="editar-biografia">
-                    Biografía
-                </label>
-
-
-                <textarea
-                    id="editar-biografia"
-                    placeholder="Cuéntanos algo sobre ti..."
-                    maxlength="160"
-                ></textarea>
-
-
-                <label for="editar-curso">
-                    Curso
-                </label>
-
-
-                <select id="editar-curso">
-
-                    <option value="">
-                        Selecciona tu curso
-                    </option>
-
-                    <option value="1 ESO">
-                        1º ESO
-                    </option>
-
-                    <option value="2 ESO">
-                        2º ESO
-                    </option>
-
-                    <option value="3 ESO">
-                        3º ESO
-                    </option>
-
-                    <option value="4 ESO">
-                        4º ESO
-                    </option>
-
-                    <option value="1 Bachillerato">
-                        1º Bachillerato
-                    </option>
-
-                    <option value="2 Bachillerato">
-                        2º Bachillerato
-                    </option>
-
-                </select>
-
-
-                <label for="editar-asignaturas">
-                    Asignaturas
-                </label>
-
-
-                <input
-                    type="text"
-                    id="editar-asignaturas"
-                    placeholder="Ej: Matemáticas, Historia, Física"
-                    maxlength="300"
-                >
-
-
-                <button
-                    type="button"
-                    class="guardar-perfil"
-                    onclick="guardarPerfil()"
-                >
-                    💾 Guardar cambios
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================================================
-         APLICACIÓN PRINCIPAL
-         ========================================================= -->
-
-    <div
-        id="app"
-        class="app oculto"
-    >
-
-
-        <!-- =====================================================
-             HEADER DE LA IA
-             ===================================================== -->
-
-        <header class="app-header">
-
-
-            <!-- USUARIO ARRIBA A LA DERECHA -->
-
-            <div class="usuario-header">
-
-
-                <button
-                    type="button"
-                    id="boton-login-header"
-                    onclick="mostrarLogin()"
-                    class="login-header-button"
-                >
-                    Iniciar sesión
-                </button>
-
-
-                <button
-                    type="button"
-                    id="boton-perfil-header"
-                    class="perfil-header"
-                    onclick="abrirPerfil()"
-                    aria-label="Abrir perfil"
-                >
-
-                    <img
-                        id="foto-usuario-header"
-                        src="/images/logo.png"
-                        alt="Foto de perfil"
-                    >
-
-
-                    <span id="nombre-usuario-header">
-                        Usuario
-                    </span>
-
-
-                    <span class="perfil-flecha">
-                        ▾
-                    </span>
-
-                </button>
-
-            </div>
-
-
-            <!-- CABECERA LIMPIA SIN LOGO -->
-
-            <div class="app-header-contenido">
+                <h1>
+                    Biblioteca
+                </h1>
 
                 <p>
-                    Convierte tus apuntes en herramientas para estudiar.
+                    Todos tus apuntes y materiales en un solo lugar.
                 </p>
 
             </div>
 
 
-            <!-- NAVEGACIÓN -->
+            <button
+                type="button"
+                class="estudio-btn-secundario"
+                onclick="abrirBibliotecaAgregar()"
+            >
+                + Añadir material
+            </button>
 
-            <nav class="studyai-navegacion">
-
-
-                <button
-                    type="button"
-                    class="home-button"
-                    onclick="volverInicio()"
-                >
-                    🏠 Inicio
-                </button>
+        </div>
 
 
-                <button
-                    type="button"
-                    class="home-button"
-                    onclick="abrirBiblioteca()"
-                >
-                    📚 Biblioteca
-                </button>
-<button
-    type="button"
-    class="home-button"
-    onclick="abrirGeneradorVideo()"
->
-    🎬 Generador de Vídeos
-</button>
+        <!-- ESTADÍSTICAS -->
 
-            </nav>
+        <section class="biblioteca-stats">
 
+            <div class="biblioteca-stat">
 
-        </header>
+                <span class="biblioteca-stat-icon">
+                    📚
+                </span>
 
+                <div>
 
+                    <strong id="biblioteca-total">
+                        0
+                    </strong>
 
-        <!-- =====================================================
-             PUBLICIDAD
-             ===================================================== -->
-
-        <section
-            id="studyai-publicidad"
-            class="studyai-publicidad oculto"
-            aria-label="Publicidad"
-        >
-
-            <div class="publicidad-contenido">
-
-
-                <div class="publicidad-etiqueta">
-                    PATROCINADO
-                </div>
-
-
-                <div
-                    class="publicidad-logo"
-                    id="publicidad-logo"
-                >
-                    📢
-                </div>
-
-
-                <div class="publicidad-texto">
-
-                    <h3 id="publicidad-titulo">
-                        Descubre una nueva oportunidad
-                    </h3>
-
-
-                    <p id="publicidad-descripcion">
-                        Un servicio pensado para estudiantes.
-                    </p>
+                    <small>
+                        Materiales
+                    </small>
 
                 </div>
-
-
-                <a
-                    id="publicidad-boton"
-                    class="publicidad-boton"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Saber más →
-                </a>
 
             </div>
 
 
-            <button
-                type="button"
-                class="publicidad-cerrar"
-                onclick="cerrarPublicidad()"
-                aria-label="Cerrar publicidad"
-            >
-                ×
-            </button>
+            <div class="biblioteca-stat">
+
+                <span class="biblioteca-stat-icon">
+                    📖
+                </span>
+
+                <div>
+
+                    <strong id="biblioteca-materias">
+                        0
+                    </strong>
+
+                    <small>
+                        Materias
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="biblioteca-stat">
+
+                <span class="biblioteca-stat-icon">
+                    🕘
+                </span>
+
+                <div>
+
+                    <strong id="biblioteca-recientes">
+                        0
+                    </strong>
+
+                    <small>
+                        Recientes
+                    </small>
+
+                </div>
+
+            </div>
 
         </section>
 
 
 
-        <!-- =====================================================
-             BIBLIOTECA
-             ===================================================== -->
+        <!-- BUSCADOR -->
 
-        <section
-            id="biblioteca-screen"
-            class="biblioteca-screen oculto"
-        >
+        <section class="modo-estudio-card biblioteca-herramientas">
+
+            <div class="biblioteca-busqueda">
+
+                <span>🔎</span>
+
+                <input
+                    type="search"
+                    id="biblioteca-busqueda"
+                    placeholder="Buscar apuntes, temas o materias..."
+                    autocomplete="off"
+                >
+
+            </div>
 
 
-            <div class="biblioteca-header">
+            <div class="biblioteca-filtros">
+
+                <button
+                    type="button"
+                    class="biblioteca-filtro activo"
+                    data-filtro="todos"
+                    onclick="filtrarBiblioteca('todos')"
+                >
+                    Todos
+                </button>
+
+                <button
+                    type="button"
+                    class="biblioteca-filtro"
+                    data-filtro="recientes"
+                    onclick="filtrarBiblioteca('recientes')"
+                >
+                    Recientes
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LISTA -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
 
                 <div>
 
-                    <h1>
-                        📚 Biblioteca
-                    </h1>
-
+                    <h2>
+                        Mis materiales
+                    </h2>
 
                     <p>
-                        Todos tus apuntes y materiales en un solo lugar.
+                        Tus apuntes guardados aparecerán aquí.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="biblioteca-lista"
+                class="biblioteca-lista"
+            >
+
+                <div class="estudio-vacio">
+
+                    <div>
+                        📚
+                    </div>
+
+                    <h3>
+                        Tu biblioteca está vacía
+                    </h3>
+
+                    <p>
+                        Añade contenido desde tus materias para verlo aquí.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MODAL AÑADIR MATERIAL
+    ===================================================== -->
+
+    <div
+        id="biblioteca-modal"
+        class="biblioteca-modal oculto"
+        onclick="if(event.target === this) cerrarBibliotecaAgregar()"
+    >
+
+        <div
+            class="biblioteca-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="biblioteca-modal-titulo"
+        >
+
+            <div class="biblioteca-modal-header">
+
+                <div>
+
+                    <span class="biblioteca-modal-icon">
+                        ✨
+                    </span>
+
+                    <div>
+
+                        <h2 id="biblioteca-modal-titulo">
+                            Añadir material
+                        </h2>
+
+                        <p>
+                            Guarda tus apuntes en tu Biblioteca.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="biblioteca-modal-cerrar"
+                    onclick="cerrarBibliotecaAgregar()"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="biblioteca-form">
+
+                <label for="biblioteca-titulo">
+                    Título
+                </label>
+
+                <input
+                    type="text"
+                    id="biblioteca-titulo"
+                    placeholder="Ej. Revolución Industrial"
+                    maxlength="120"
+                    autocomplete="off"
+                >
+
+
+                <label for="biblioteca-materia">
+                    Materia
+                </label>
+
+                <select id="biblioteca-materia"></select>
+
+
+                <label for="biblioteca-texto">
+                    Apuntes
+                </label>
+
+                <textarea
+                    id="biblioteca-texto"
+                    placeholder="Escribe o pega aquí tus apuntes..."
+                    rows="9"
+                ></textarea>
+
+            </div>
+
+
+            <div class="biblioteca-modal-footer">
+
+                <button
+                    type="button"
+                    class="biblioteca-btn-cancelar"
+                    onclick="cerrarBibliotecaAgregar()"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="button"
+                    class="biblioteca-btn-guardar"
+                    onclick="guardarMaterialBiblioteca()"
+                >
+                    ✓ Guardar material
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL VER CONTENIDO
+    ===================================================== -->
+
+    <div
+        id="biblioteca-contenido-modal"
+        class="biblioteca-modal oculto"
+        onclick="if(event.target === this) cerrarContenidoBiblioteca()"
+    >
+
+        <div
+            class="biblioteca-modal-card biblioteca-contenido-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="biblioteca-contenido-titulo"
+        >
+
+            <div class="biblioteca-modal-header">
+
+                <div>
+
+                    <span class="biblioteca-modal-icon">
+                        📖
+                    </span>
+
+                    <div>
+
+                        <h2 id="biblioteca-contenido-titulo">
+                            Contenido
+                        </h2>
+
+                        <p id="biblioteca-contenido-materia">
+                            Biblioteca
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="biblioteca-modal-cerrar"
+                    onclick="cerrarContenidoBiblioteca()"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="biblioteca-modal-contenido"
+                class="biblioteca-contenido-body"
+            ></div>
+
+
+            <div class="biblioteca-modal-footer">
+
+                <button
+                    type="button"
+                    class="biblioteca-btn-cancelar"
+                    onclick="cerrarContenidoBiblioteca()"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MATERIA
+    ===================================================== -->
+
+    <section
+        id="materia-screen"
+        class="materia-screen oculto"
+    >
+
+        <div class="materia-screen-header">
+
+            <button
+                type="button"
+                class="modo-estudio-volver"
+                onclick="cerrarMateria()"
+            >
+                ← Volver
+            </button>
+
+
+            <div>
+
+                <h1 id="materia-titulo">
+                    Materia
+                </h1>
+
+                <p id="materia-subtitulo">
+                    Organiza y estudia esta materia.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESUMEN -->
+
+        <section class="materia-resumen">
+
+            <div class="materia-resumen-card">
+
+                <span>
+                    📖
+                </span>
+
+                <div>
+
+                    <strong id="materia-contenidos">
+                        0
+                    </strong>
+
+                    <small>
+                        Contenidos
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="materia-resumen-card">
+
+                <span>
+                    📈
+                </span>
+
+                <div>
+
+                    <strong id="materia-progreso">
+                        0%
+                    </strong>
+
+                    <small>
+                        Progreso
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ESTUDIAR -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
+
+                <div>
+
+                    <h2>
+                        Estudiar
+                    </h2>
+
+                    <p>
+                        Elige cómo quieres estudiar esta materia.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="modo-estudio-acciones">
+
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="materiaFlashcards()"
+                >
+
+                    <span class="estudio-accion-icon">
+                        🃏
+                    </span>
+
+                    <span class="estudio-accion-texto">
+
+                        <strong>
+                            Flashcards
+                        </strong>
+
+                        <small>
+                            Memoriza los conceptos importantes.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="materiaTest()"
+                >
+
+                    <span class="estudio-accion-icon">
+                        🎯
+                    </span>
+
+                    <span class="estudio-accion-texto">
+
+                        <strong>
+                            Hacer un test
+                        </strong>
+
+                        <small>
+                            Comprueba cuánto sabes.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="materiaRepasar()"
+                >
+
+                    <span class="estudio-accion-icon">
+                        🔄
+                    </span>
+
+                    <span class="estudio-accion-texto">
+
+                        <strong>
+                            Repasar
+                        </strong>
+
+                        <small>
+                            Repasa el contenido pendiente.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CONTENIDO -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
+
+                <div>
+
+                    <h2>
+                        Contenido
+                    </h2>
+
+                    <p>
+                        Añade apuntes para estudiar esta materia.
                     </p>
 
                 </div>
@@ -490,719 +979,226 @@
                 <button
                     type="button"
                     class="estudio-btn-secundario"
-                    onclick="abrirBibliotecaAgregar()"
+                    onclick="agregarContenidoMateria()"
                 >
-                    + Añadir material
+                    + Añadir contenido
                 </button>
 
             </div>
 
-
-
-            <!-- ESTADÍSTICAS -->
-
-            <section class="biblioteca-stats">
-
-
-                <div class="biblioteca-stat">
-
-                    <span class="biblioteca-stat-icon">
-                        📚
-                    </span>
-
-                    <div>
-
-                        <strong id="biblioteca-total">
-                            0
-                        </strong>
-
-                        <small>
-                            Materiales
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="biblioteca-stat">
-
-                    <span class="biblioteca-stat-icon">
-                        📖
-                    </span>
-
-                    <div>
-
-                        <strong id="biblioteca-materias">
-                            0
-                        </strong>
-
-                        <small>
-                            Materias
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="biblioteca-stat">
-
-                    <span class="biblioteca-stat-icon">
-                        🕘
-                    </span>
-
-                    <div>
-
-                        <strong id="biblioteca-recientes">
-                            0
-                        </strong>
-
-                        <small>
-                            Recientes
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- BUSCADOR -->
-
-            <section class="modo-estudio-card biblioteca-herramientas">
-
-
-                <div class="biblioteca-busqueda">
-
-                    <span>
-                        🔎
-                    </span>
-
-
-                    <input
-                        type="search"
-                        id="biblioteca-busqueda"
-                        placeholder="Buscar apuntes, temas o materias..."
-                        autocomplete="off"
-                    >
-
-                </div>
-
-
-                <div class="biblioteca-filtros">
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-filtro activo"
-                        data-filtro="todos"
-                        onclick="filtrarBiblioteca('todos')"
-                    >
-                        Todos
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-filtro"
-                        data-filtro="recientes"
-                        onclick="filtrarBiblioteca('recientes')"
-                    >
-                        Recientes
-                    </button>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- LISTA -->
-
-            <section class="modo-estudio-card">
-
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            📝 Mis materiales
-                        </h2>
-
-
-                        <p>
-                            Tus apuntes guardados aparecerán aquí.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="biblioteca-lista"
-                    class="biblioteca-lista"
-                >
-
-                    <div class="estudio-vacio">
-
-                        <div>
-                            📚
-                        </div>
-
-
-                        <h3>
-                            Tu biblioteca está vacía
-                        </h3>
-
-
-                        <p>
-                            Añade contenido desde tus materias para verlo aquí.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             MODAL AÑADIR MATERIAL
-             ===================================================== -->
-
-        <div
-            id="biblioteca-modal"
-            class="biblioteca-modal oculto"
-            onclick="if(event.target === this) cerrarBibliotecaAgregar()"
-        >
 
             <div
-                class="biblioteca-modal-card"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="biblioteca-modal-titulo"
+                id="lista-contenido-materia"
+                class="lista-materias"
             >
 
-
-                <div class="biblioteca-modal-header">
-
-                    <div>
-
-                        <span class="biblioteca-modal-icon">
-                            ✨
-                        </span>
-
-
-                        <div>
-
-                            <h2 id="biblioteca-modal-titulo">
-                                Añadir material
-                            </h2>
-
-
-                            <p>
-                                Guarda tus apuntes en tu Biblioteca.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-modal-cerrar"
-                        onclick="cerrarBibliotecaAgregar()"
-                        aria-label="Cerrar"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-
-                <div class="biblioteca-form">
-
-
-                    <label for="biblioteca-titulo">
-                        Título
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="biblioteca-titulo"
-                        placeholder="Ej. Revolución Industrial"
-                        maxlength="120"
-                        autocomplete="off"
-                    >
-
-
-                    <label for="biblioteca-materia">
-                        Materia
-                    </label>
-
-
-                    <select id="biblioteca-materia"></select>
-
-
-                    <label for="biblioteca-texto">
-                        Apuntes
-                    </label>
-
-
-                    <textarea
-                        id="biblioteca-texto"
-                        placeholder="Escribe o pega aquí tus apuntes..."
-                        rows="9"
-                    ></textarea>
-
-                </div>
-
-
-                <div class="biblioteca-modal-footer">
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-btn-cancelar"
-                        onclick="cerrarBibliotecaAgregar()"
-                    >
-                        Cancelar
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-btn-guardar"
-                        onclick="guardarMaterialBiblioteca()"
-                    >
-
-                        <span>
-                            ✓
-                        </span>
-
-                        Guardar material
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =====================================================
-             MODAL VER CONTENIDO
-             ===================================================== -->
-
-        <div
-            id="biblioteca-contenido-modal"
-            class="biblioteca-modal oculto"
-            onclick="if(event.target === this) cerrarContenidoBiblioteca()"
-        >
-
-            <div
-                class="biblioteca-modal-card biblioteca-contenido-modal-card"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="biblioteca-contenido-titulo"
-            >
-
-
-                <div class="biblioteca-modal-header">
+                <div class="estudio-vacio">
 
                     <div>
-
-                        <span class="biblioteca-modal-icon">
-                            📖
-                        </span>
-
-
-                        <div>
-
-                            <h2 id="biblioteca-contenido-titulo">
-                                Contenido
-                            </h2>
-
-
-                            <p id="biblioteca-contenido-materia">
-                                Biblioteca
-                            </p>
-
-                        </div>
-
+                        📝
                     </div>
 
-
-                    <button
-                        type="button"
-                        class="biblioteca-modal-cerrar"
-                        onclick="cerrarContenidoBiblioteca()"
-                        aria-label="Cerrar"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-
-                <div
-                    id="biblioteca-modal-contenido"
-                    class="biblioteca-contenido-body"
-                ></div>
-
-
-                <div class="biblioteca-modal-footer">
-
-
-                    <button
-                        type="button"
-                        class="biblioteca-btn-cancelar"
-                        onclick="cerrarContenidoBiblioteca()"
-                    >
-                        Cerrar
-                    </button>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =====================================================
-             MATERIA
-             ===================================================== -->
-
-        <section
-            id="materia-screen"
-            class="materia-screen oculto"
-        >
-
-
-            <div class="materia-screen-header">
-
-
-                <button
-                    type="button"
-                    class="modo-estudio-volver"
-                    onclick="cerrarMateria()"
-                >
-                    ← Volver
-                </button>
-
-
-                <div>
-
-                    <h1 id="materia-titulo">
-                        📚 Materia
-                    </h1>
-
-
-                    <p id="materia-subtitulo">
-                        Organiza y estudia esta materia.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- RESUMEN -->
-
-            <section class="materia-resumen">
-
-
-                <div class="materia-resumen-card">
-
-                    <span>
-                        📖
-                    </span>
-
-
-                    <div>
-
-                        <strong id="materia-contenidos">
-                            0
-                        </strong>
-
-
-                        <small>
-                            Contenidos
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="materia-resumen-card">
-
-                    <span>
-                        📈
-                    </span>
-
-
-                    <div>
-
-                        <strong id="materia-progreso">
-                            0%
-                        </strong>
-
-
-                        <small>
-                            Progreso
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- ESTUDIAR -->
-
-            <section class="modo-estudio-card">
-
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            🚀 Estudiar
-                        </h2>
-
-
-                        <p>
-                            Elige cómo quieres estudiar esta materia.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="modo-estudio-acciones">
-
-
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="materiaFlashcards()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            🃏
-                        </span>
-
-
-                        <span class="estudio-accion-texto">
-
-                            <strong>
-                                Flashcards
-                            </strong>
-
-
-                            <small>
-                                Memoriza los conceptos importantes.
-                            </small>
-
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="materiaTest()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            🎯
-                        </span>
-
-
-                        <span class="estudio-accion-texto">
-
-                            <strong>
-                                Hacer un test
-                            </strong>
-
-
-                            <small>
-                                Comprueba cuánto sabes.
-                            </small>
-
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="materiaRepasar()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            🔄
-                        </span>
-
-
-                        <span class="estudio-accion-texto">
-
-                            <strong>
-                                Repasar
-                            </strong>
-
-
-                            <small>
-                                Repasa el contenido pendiente.
-                            </small>
-
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- CONTENIDO -->
-
-            <section class="modo-estudio-card">
-
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            📝 Contenido
-                        </h2>
-
-
-                        <p>
-                            Añade apuntes para estudiar esta materia.
-                        </p>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="estudio-btn-secundario"
-                        onclick="agregarContenidoMateria()"
-                    >
-                        + Añadir contenido
-                    </button>
-
-                </div>
-
-
-                <div
-                    id="lista-contenido-materia"
-                    class="lista-materias"
-                >
-
-                    <div class="estudio-vacio">
-
-                        <div>
-                            📝
-                        </div>
-
-
-                        <h3>
-                            Todavía no hay contenido
-                        </h3>
-
-
-                        <p>
-                            Añade tus primeros apuntes para empezar.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             MODO ESTUDIO
-             ===================================================== -->
-
-        <section
-            id="modo-estudio"
-            class="modo-estudio-screen oculto"
-        >
-
-
-            <div class="modo-estudio-header">
-
-
-                <button
-                    type="button"
-                    class="modo-estudio-volver"
-                    onclick="cerrarModoEstudio()"
-                >
-                    ← Volver
-                </button>
-
-
-                <div>
-
-                    <h1>
-                        🧠 Modo Estudio
-                    </h1>
-
+                    <h3>
+                        Todavía no hay contenido
+                    </h3>
 
                     <p>
-                        Organiza tu estudio, repasa y mejora tu progreso.
+                        Añade tus primeros apuntes para empezar.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MODO ESTUDIO
+    ===================================================== -->
+
+    <section
+        id="modo-estudio"
+        class="modo-estudio-screen oculto"
+    >
+
+        <div class="modo-estudio-header">
+
+            <button
+                type="button"
+                class="modo-estudio-volver"
+                onclick="cerrarModoEstudio()"
+            >
+                ← Volver
+            </button>
+
+
+            <div>
+
+                <h1>
+                    Modo Estudio
+                </h1>
+
+                <p>
+                    Organiza tu estudio, repasa y mejora tu progreso.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECOMENDACIÓN -->
+
+        <section
+            id="estudio-recomendacion"
+            class="modo-estudio-recomendacion"
+        >
+
+            <div class="recomendacion-icono">
+                🧠
+            </div>
+
+
+            <div class="recomendacion-contenido">
+
+                <span class="recomendacion-etiqueta">
+                    RECOMENDACIÓN DE STUDYAI
+                </span>
+
+                <h2 id="recomendacion-titulo">
+                    Preparando tu sesión...
+                </h2>
+
+                <p id="recomendacion-descripcion">
+                    StudyAI está analizando tus materias.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="recomendacion-boton"
+                class="estudio-btn-principal"
+                onclick="ejecutarRecomendacionEstudio()"
+            >
+                Empezar →
+            </button>
+
+        </section>
+
+
+
+        <!-- ESTADÍSTICAS -->
+
+        <section class="modo-estudio-resumen">
+
+            <div class="estudio-stat">
+
+                <span class="estudio-stat-icon">
+                    📚
+                </span>
+
+                <div>
+
+                    <strong id="estudio-materias">
+                        0
+                    </strong>
+
+                    <span>
+                        Materias
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="estudio-stat">
+
+                <span class="estudio-stat-icon">
+                    🎯
+                </span>
+
+                <div>
+
+                    <strong id="estudio-sesiones">
+                        0
+                    </strong>
+
+                    <span>
+                        Sesiones
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="estudio-stat">
+
+                <span class="estudio-stat-icon">
+                    🔥
+                </span>
+
+                <div>
+
+                    <strong id="estudio-racha">
+                        0
+                    </strong>
+
+                    <span>
+                        Días de racha
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="estudio-stat">
+
+                <span class="estudio-stat-icon">
+                    📈
+                </span>
+
+                <div>
+
+                    <strong id="estudio-progreso">
+                        0%
+                    </strong>
+
+                    <span>
+                        Progreso
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACCIONES -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
+
+                <div>
+
+                    <h2>
+                        ¿Qué quieres hacer?
+                    </h2>
+
+                    <p>
+                        Elige una actividad para empezar a estudiar.
                     </p>
 
                 </div>
@@ -1210,34 +1206,114 @@
             </div>
 
 
+            <div class="modo-estudio-acciones">
 
-            <!-- RECOMENDACIÓN -->
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="estudioRepasar()"
+                >
 
-            <section
-                id="estudio-recomendacion"
-                class="modo-estudio-recomendacion"
-            >
-
-
-                <div class="recomendacion-icono">
-                    🧠
-                </div>
-
-
-                <div class="recomendacion-contenido">
-
-                    <span class="recomendacion-etiqueta">
-                        RECOMENDACIÓN DE STUDYAI
+                    <span class="estudio-accion-icon">
+                        📖
                     </span>
 
+                    <span class="estudio-accion-texto">
 
-                    <h2 id="recomendacion-titulo">
-                        Preparando tu sesión...
+                        <strong>
+                            Estudiar
+                        </strong>
+
+                        <small>
+                            Repasa y comprende tus contenidos.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="estudioTest()"
+                >
+
+                    <span class="estudio-accion-icon">
+                        🧠
+                    </span>
+
+                    <span class="estudio-accion-texto">
+
+                        <strong>
+                            Practicar
+                        </strong>
+
+                        <small>
+                            Responde preguntas y comprueba lo que sabes.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="estudio-accion"
+                    onclick="estudioFlashcards()"
+                >
+
+                    <span class="estudio-accion-icon">
+                        🃏
+                    </span>
+
+                    <span class="estudio-accion-texto">
+
+                        <strong>
+                            Memorizar
+                        </strong>
+
+                        <small>
+                            Aprende conceptos con tarjetas.
+                        </small>
+
+                    </span>
+
+                    <span class="estudio-accion-flecha">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MATERIAS -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
+
+                <div>
+
+                    <h2>
+                        Mis materias
                     </h2>
 
-
-                    <p id="recomendacion-descripcion">
-                        StudyAI está analizando tus materias.
+                    <p>
+                        Aquí aparecerán tus materias y su progreso.
                     </p>
 
                 </div>
@@ -1245,1338 +1321,1060 @@
 
                 <button
                     type="button"
-                    id="recomendacion-boton"
-                    class="estudio-btn-principal"
-                    onclick="ejecutarRecomendacionEstudio()"
+                    class="estudio-btn-secundario"
+                    onclick="crearMateria()"
                 >
-                    Empezar →
+                    + Nueva materia
+                </button>
+
+            </div>
+
+
+            <div
+                id="lista-materias"
+                class="lista-materias"
+            >
+
+                <div class="estudio-vacio">
+
+                    <div>
+                        📖
+                    </div>
+
+                    <h3>
+                        Todavía no tienes materias
+                    </h3>
+
+                    <p>
+                        Crea tu primera materia para empezar a organizar tu estudio.
+                    </p>
+
+                    <button
+                        type="button"
+                        onclick="crearMateria()"
+                        class="estudio-btn-principal"
+                    >
+                        Crear materia
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PROGRESO -->
+
+        <section class="modo-estudio-card">
+
+            <div class="modo-estudio-card-header">
+
+                <div>
+
+                    <h2>
+                        Mi progreso
+                    </h2>
+
+                    <p>
+                        Tu progreso aparecerá aquí cuando empieces a estudiar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="estudio-progreso-vacio">
+
+                <div class="progreso-circulo">
+                    0%
+                </div>
+
+                <div>
+
+                    <strong>
+                        Empieza tu primera sesión
+                    </strong>
+
+                    <p>
+                        StudyAI irá registrando tu progreso automáticamente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         GENERADOR DE VÍDEOS 3D
+    ===================================================== -->
+
+    <section
+        id="generador-video-screen"
+        class="generador-video-screen oculto"
+    >
+
+        <div class="generador-video-header">
+
+            <div>
+
+                <button
+                    type="button"
+                    class="modo-estudio-volver"
+                    onclick="cerrarGeneradorVideo()"
+                >
+                    ← Volver
                 </button>
 
 
-            </section>
+                <div class="generador-video-titulo">
 
-
-
-            <!-- ESTADÍSTICAS -->
-
-            <section class="modo-estudio-resumen">
-
-
-                <div class="estudio-stat">
-
-                    <span class="estudio-stat-icon">
-                        📚
-                    </span>
-
-
-                    <div>
-
-                        <strong id="estudio-materias">
-                            0
-                        </strong>
-
-
-                        <span>
-                            Materias
-                        </span>
-
+                    <div class="generador-video-icono">
+                        ▶
                     </div>
 
-                </div>
-
-
-                <div class="estudio-stat">
-
-                    <span class="estudio-stat-icon">
-                        🎯
-                    </span>
-
-
                     <div>
 
-                        <strong id="estudio-sesiones">
-                            0
-                        </strong>
-
-
-                        <span>
-                            Sesiones
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="estudio-stat">
-
-                    <span class="estudio-stat-icon">
-                        🔥
-                    </span>
-
-
-                    <div>
-
-                        <strong id="estudio-racha">
-                            0
-                        </strong>
-
-
-                        <span>
-                            Días de racha
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="estudio-stat">
-
-                    <span class="estudio-stat-icon">
-                        📈
-                    </span>
-
-
-                    <div>
-
-                        <strong id="estudio-progreso">
-                            0%
-                        </strong>
-
-
-                        <span>
-                            Progreso
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- ACCIONES -->
-
-            <section class="modo-estudio-card">
-
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            🚀 ¿Qué quieres hacer?
-                        </h2>
-
+                        <h1>
+                            Generador de Vídeos
+                        </h1>
 
                         <p>
-                            Elige una actividad para empezar a estudiar.
+                            Crea vídeos 3D cinematográficos a partir de una descripción.
                         </p>
 
                     </div>
 
                 </div>
 
-
-                <div class="modo-estudio-acciones">
-
-
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="estudioRepasar()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            📖
-                        </span>
+            </div>
 
 
-                        <span class="estudio-accion-texto">
+            <div class="generador-video-estado">
 
-                            <strong>
-                                Estudiar
-                            </strong>
+                <span></span>
 
+                Motor preparado
 
-                            <small>
-                                Repasa y comprende tus contenidos.
-                            </small>
+            </div>
 
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
+        </div>
 
 
 
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="estudioTest()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            🧠
-                        </span>
+        <div class="generador-video-layout">
 
 
-                        <span class="estudio-accion-texto">
+            <!-- =================================================
+                 PANEL
+            ================================================= -->
 
-                            <strong>
-                                Practicar
-                            </strong>
+            <aside class="generador-video-panel">
 
+                <div class="generador-video-panel-titulo">
 
-                            <small>
-                                Responde preguntas y comprueba lo que sabes.
-                            </small>
+                    <strong>
+                        Crear vídeo
+                    </strong>
 
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="estudio-accion"
-                        onclick="estudioFlashcards()"
-                    >
-
-                        <span class="estudio-accion-icon">
-                            🃏
-                        </span>
-
-
-                        <span class="estudio-accion-texto">
-
-                            <strong>
-                                Memorizar
-                            </strong>
-
-
-                            <small>
-                                Aprende conceptos con tarjetas.
-                            </small>
-
-                        </span>
-
-
-                        <span class="estudio-accion-flecha">
-                            →
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- MATERIAS -->
-
-            <section class="modo-estudio-card">
-
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            📚 Mis materias
-                        </h2>
-
-
-                        <p>
-                            Aquí aparecerán tus materias y su progreso.
-                        </p>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="estudio-btn-secundario"
-                        onclick="crearMateria()"
-                    >
-                        + Nueva materia
-                    </button>
+                    <small>
+                        Describe exactamente lo que quieres ver.
+                    </small>
 
                 </div>
 
 
-                <div
-                    id="lista-materias"
-                    class="lista-materias"
+                <label
+                    for="video-prompt"
+                    class="generador-video-label"
                 >
-
-                    <div class="estudio-vacio">
-
-                        <div>
-                            📖
-                        </div>
+                    Descripción
+                </label>
 
 
-                        <h3>
-                            Todavía no tienes materias
-                        </h3>
+                <textarea
+                    id="video-prompt"
+                    class="generador-video-prompt"
+                    placeholder="Ejemplo: Un tren atraviesa una ciudad nevada durante la noche. Hay luces cálidas en las ventanas, nieve cayendo y la cámara sigue al tren desde el aire..."
+                ></textarea>
 
 
-                        <p>
-                            Crea tu primera materia para empezar a organizar tu estudio.
-                        </p>
+                <div class="generador-video-contador">
+
+                    <span id="video-prompt-contador">
+                        0
+                    </span>
+
+                    / 2000
+
+                </div>
+
+
+
+                <!-- TIPO -->
+
+                <div class="generador-video-seccion">
+
+                    <span class="generador-video-label">
+                        Tipo de vídeo
+                    </span>
+
+
+                    <div class="generador-video-opciones">
+
+                        <button
+                            type="button"
+                            class="generador-video-opcion activo"
+                            data-video-tipo="cinematico"
+                            onclick="seleccionarTipoVideo('cinematico', this)"
+                        >
+
+                            <span>🎬</span>
+
+                            <div>
+
+                                <strong>
+                                    Cinemático
+                                </strong>
+
+                                <small>
+                                    Estilo película
+                                </small>
+
+                            </div>
+
+                        </button>
 
 
                         <button
                             type="button"
-                            onclick="crearMateria()"
-                            class="estudio-btn-principal"
+                            class="generador-video-opcion"
+                            data-video-tipo="animacion"
+                            onclick="seleccionarTipoVideo('animacion', this)"
                         >
-                            Crear materia
+
+                            <span>✨</span>
+
+                            <div>
+
+                                <strong>
+                                    Animación
+                                </strong>
+
+                                <small>
+                                    Animación 3D
+                                </small>
+
+                            </div>
+
                         </button>
 
                     </div>
 
                 </div>
 
-            </section>
+
+
+                <!-- DURACIÓN -->
+
+                <div class="generador-video-seccion">
+
+                    <label
+                        for="video-duracion"
+                        class="generador-video-label"
+                    >
+                        Duración
+                    </label>
+
+
+                    <select
+                        id="video-duracion"
+                        class="generador-video-select"
+                    >
+
+                        <option value="5">
+                            5 segundos
+                        </option>
+
+                        <option value="10" selected>
+                            10 segundos
+                        </option>
+
+                        <option value="15">
+                            15 segundos
+                        </option>
+
+                        <option value="30">
+                            30 segundos
+                        </option>
+
+                    </select>
+
+                </div>
 
 
 
-            <!-- PROGRESO -->
+                <!-- FORMATO -->
 
-            <section class="modo-estudio-card">
+                <div class="generador-video-seccion">
 
-
-                <div class="modo-estudio-card-header">
-
-                    <div>
-
-                        <h2>
-                            📈 Mi progreso
-                        </h2>
+                    <span class="generador-video-label">
+                        Formato
+                    </span>
 
 
-                        <p>
-                            Tu progreso aparecerá aquí cuando empieces a estudiar.
-                        </p>
+                    <div class="generador-video-formatos">
+
+                        <button
+                            type="button"
+                            class="generador-video-formato activo"
+                            onclick="seleccionarFormatoVideo('16:9', this)"
+                        >
+
+                            <strong>
+                                16:9
+                            </strong>
+
+                            <small>
+                                Horizontal
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="generador-video-formato"
+                            onclick="seleccionarFormatoVideo('9:16', this)"
+                        >
+
+                            <strong>
+                                9:16
+                            </strong>
+
+                            <small>
+                                Vertical
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="generador-video-formato"
+                            onclick="seleccionarFormatoVideo('1:1', this)"
+                        >
+
+                            <strong>
+                                1:1
+                            </strong>
+
+                            <small>
+                                Cuadrado
+                            </small>
+
+                        </button>
 
                     </div>
 
                 </div>
 
 
-                <div class="estudio-progreso-vacio">
+
+                <!-- CALIDAD -->
+
+                <div class="generador-video-seccion">
+
+                    <label
+                        for="video-calidad"
+                        class="generador-video-label"
+                    >
+                        Calidad
+                    </label>
 
 
-                    <div class="progreso-circulo">
-                        0%
+                    <select
+                        id="video-calidad"
+                        class="generador-video-select"
+                    >
+
+                        <option value="720p">
+                            HD · 720p
+                        </option>
+
+                        <option value="1080p" selected>
+                            Full HD · 1080p
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- GENERAR -->
+
+                <button
+                    type="button"
+                    class="generador-video-generar"
+                    onclick="generarVideo3D()"
+                >
+
+                    <span>
+                        ✨
+                    </span>
+
+                    Generar vídeo
+
+                </button>
+
+            </aside>
+
+
+
+            <!-- =================================================
+                 PREVISUALIZACIÓN
+            ================================================= -->
+
+            <main class="generador-video-preview">
+
+
+                <div class="generador-video-preview-top">
+
+                    <div>
+
+                        <span>
+                            PREVISUALIZACIÓN
+                        </span>
+
+                        <h2 id="video-escena-titulo">
+                            Tu vídeo aparecerá aquí
+                        </h2>
+
                     </div>
 
+
+                    <div class="generador-video-preview-controles">
+
+                        <button
+                            type="button"
+                            onclick="reproducirVideoPreview()"
+                            aria-label="Reproducir"
+                        >
+                            ▶
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="reiniciarVideoPreview()"
+                            aria-label="Reiniciar"
+                        >
+                            ↻
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="pantallaCompletaVideo()"
+                            aria-label="Pantalla completa"
+                        >
+                            ⛶
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     VISOR 3D
+                ================================================= -->
+
+                <div
+    id="video-preview"
+    class="generador-video-preview-visor"
+>
+
+    <div
+        id="video-3d"
+        class="video-3d"
+    ></div>
+
+    <div
+        id="video-preview-vacio"
+        class="generador-video-preview-vacio"
+    >
+
+        <div class="generador-video-play-grande">
+            ▶
+        </div>
+
+        <h3>
+            Crea tu primera escena
+        </h3>
+
+        <p>
+            Describe una escena y StudyAI preparará tu vídeo 3D.
+        </p>
+
+    </div>
+
+
+    <div
+        id="video-generando"
+        class="generador-video-generando oculto"
+    >
+
+        <div class="generador-video-spinner"></div>
+
+        <strong>
+            Construyendo tu vídeo...
+        </strong>
+
+        <span id="video-generando-texto">
+            Preparando escena 3D
+        </span>
+
+    </div>
+
+</div>
+
+                        <div class="generador-video-play-grande">
+                            ▶
+                        </div>
+
+                        <h3>
+                            Crea tu primera escena
+                        </h3>
+
+                        <p>
+                            Describe una escena y StudyAI preparará tu vídeo 3D.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="video-generando"
+                        class="generador-video-generando oculto"
+                    >
+
+                        <div class="generador-video-spinner"></div>
+
+                        <strong>
+                            Construyendo tu vídeo...
+                        </strong>
+
+                        <span id="video-generando-texto">
+                            Preparando escena 3D
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TIMELINE
+                ================================================= -->
+
+                <div class="generador-video-timeline">
+
+                    <div class="generador-video-tiempo">
+
+                        <span id="video-tiempo-actual">
+                            00:00
+                        </span>
+
+                        <span>
+                            /
+                        </span>
+
+                        <span id="video-tiempo-total">
+                            00:10
+                        </span>
+
+                    </div>
+
+
+                    <input
+                        type="range"
+                        id="video-timeline"
+                        min="0"
+                        max="10"
+                        value="0"
+                        step="0.1"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="generador-video-descargar"
+                        onclick="descargarVideoGenerado()"
+                    >
+                        ↓ Exportar
+                    </button>
+
+                </div>
+
+            </main>
+
+        </div>
+
+
+
+        <!-- =================================================
+             IDEAS
+        ================================================= -->
+
+        <div class="generador-video-ideas">
+
+            <div>
+
+                <span>
+                    IDEAS PARA EMPEZAR
+                </span>
+
+                <h2>
+                    ¿Qué quieres crear?
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="usarPromptVideo('Una ciudad futurista de noche con enormes rascacielos, coches voladores y luces de neón mientras la cámara sobrevuela la ciudad.')"
+            >
+                🌃 Ciudad futurista
+            </button>
+
+
+            <button
+                type="button"
+                onclick="usarPromptVideo('Un tren antiguo atraviesa un paisaje nevado al atardecer, con nieve cayendo y una cámara cinematográfica siguiéndolo desde las vías.')"
+            >
+                🚂 Tren nevado
+            </button>
+
+
+            <button
+                type="button"
+                onclick="usarPromptVideo('Un astronauta camina sobre Marte mientras el sol aparece detrás de una enorme montaña y la cámara se aleja lentamente.')"
+            >
+                🚀 Marte
+            </button>
+
+
+            <button
+                type="button"
+                onclick="usarPromptVideo('Una habitación de estudiante durante una noche de tormenta, con un ordenador encendido y gotas de lluvia golpeando la ventana.')"
+            >
+                🖥️ Habitación
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ===================================================== -->
+
+    <main id="contenido-principal">
+
+
+        <!-- =================================================
+             PERFIL
+        ================================================= -->
+
+        <section
+            id="perfil-panel"
+            class="perfil-panel oculto"
+        >
+
+            <div class="perfil-card">
+
+                <button
+                    type="button"
+                    class="perfil-cerrar"
+                    onclick="cerrarPerfil()"
+                >
+                    ✕
+                </button>
+
+
+                <div class="perfil-grande">
+
+                    <img
+                        id="perfil-foto-grande"
+                        src="/images/logo.png"
+                        alt="Foto de perfil"
+                    >
+
+                </div>
+
+
+                <h2 id="perfil-nombre-grande">
+                    Mi perfil
+                </h2>
+
+
+                <p id="perfil-email"></p>
+
+
+                <div class="perfil-datos">
+
+                    <label for="perfil-username">
+                        Nombre de usuario
+                    </label>
+
+                    <input
+                        id="perfil-username"
+                        type="text"
+                        readonly
+                    >
+
+
+                    <label for="perfil-biografia">
+                        Biografía
+                    </label>
+
+                    <textarea
+                        id="perfil-biografia"
+                        readonly
+                    ></textarea>
+
+
+                    <label for="perfil-curso">
+                        Curso
+                    </label>
+
+                    <input
+                        id="perfil-curso"
+                        type="text"
+                        readonly
+                    >
+
+
+                    <label for="perfil-asignaturas">
+                        Asignaturas
+                    </label>
+
+                    <input
+                        id="perfil-asignaturas"
+                        type="text"
+                        readonly
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-guardar-perfil"
+                    onclick="editarPerfil()"
+                >
+                    Editar perfil
+                </button>
+
+
+                <a
+                    href="/auth/logout"
+                    class="btn-cerrar-sesion"
+                >
+                    Cerrar sesión
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GENERADOR PRINCIPAL
+        ================================================= -->
+
+        <section class="card">
+
+            <h2>
+                Tus apuntes
+            </h2>
+
+
+            <textarea
+                id="apuntes"
+                placeholder="Pega aquí tus apuntes..."
+            ></textarea>
+
+
+
+            <!-- ARCHIVOS -->
+
+            <div class="archivos-studyai">
+
+                <div class="archivos-studyai-cabecera">
 
                     <div>
 
                         <strong>
-                            Empieza tu primera sesión
+                            Adjunta tus apuntes
                         </strong>
 
-
-                        <p>
-                            StudyAI irá registrando tu progreso automáticamente.
-                        </p>
+                        <span>
+                            PDF, TXT, JPG, PNG o WEBP · máximo 5 archivos
+                        </span>
 
                     </div>
 
 
+                    <span
+                        class="archivos-contador"
+                        id="archivos-contador"
+                    >
+                        0/5
+                    </span>
+
                 </div>
 
-            </section>
+
+                <input
+                    type="file"
+                    id="archivos-input"
+                    multiple
+                    accept="image/png,image/jpeg,image/webp,application/pdf,text/plain,.txt"
+                    hidden
+                    onchange="seleccionarArchivos(event)"
+                >
+
+
+                <button
+                    type="button"
+                    class="btn-adjuntar"
+                    onclick="document.getElementById('archivos-input').click()"
+                >
+                    📎 Seleccionar archivos
+                </button>
+
+
+                <div
+                    id="archivos-seleccionados"
+                    class="archivos-seleccionados"
+                ></div>
+
+            </div>
+
+
+
+            <!-- MODOS -->
+
+            <div class="modos">
+
+                <button
+                    type="button"
+                    class="modo"
+                    onclick="seleccionarModo('examen', this)"
+                >
+                    Examen
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modo activo"
+                    onclick="seleccionarModo('preguntas', this)"
+                >
+                    Preguntas
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modo"
+                    onclick="seleccionarModo('resumen', this)"
+                >
+                    Resumen
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modo"
+                    onclick="seleccionarModo('flashcards', this)"
+                >
+                    Flashcards
+                </button>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="tipo"
+                value="preguntas"
+            >
+
+
+
+            <!-- ACCIONES -->
+
+            <div class="acciones-studyai">
+
+                <button
+                    type="button"
+                    onclick="generar()"
+                    class="btn-generar"
+                >
+                    ✨ Generar
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="guardarSesion()"
+                    class="btn-guardar"
+                >
+                    💾 Guardar sesión
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="nuevaSesion()"
+                    class="btn-nueva"
+                >
+                    ↻ Nueva sesión
+                </button>
+
+            </div>
+
+
+
+            <!-- MODO ESTUDIO -->
+
+            <button
+                type="button"
+                onclick="abrirModoEstudio()"
+                class="btn-modo-estudio"
+            >
+                🧠 Modo Estudio
+            </button>
 
         </section>
 
-<!-- =====================================================
-     GENERADOR DE VÍDEOS 3D
-     ===================================================== -->
-
-<section
-    id="generador-video-screen"
-    class="generador-video-screen oculto"
->
-
-    <div class="generador-video-header">
-
-        <div>
-
-            <button
-                type="button"
-                class="modo-estudio-volver"
-                onclick="cerrarGeneradorVideo()"
-            >
-                ← Volver
-            </button>
-
-            <div class="generador-video-titulo">
-
-                <div class="generador-video-icono">
-                    ▶
-                </div>
-
-                <div>
-
-                    <h1>
-                        Generador de Vídeos
-                    </h1>
-
-                    <p>
-                        Crea vídeos 3D cinematográficos a partir de una descripción.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="generador-video-estado">
-
-            <span></span>
-
-            Motor preparado
-
-        </div>
-
-    </div>
-
-
-
-    <div class="generador-video-layout">
 
 
         <!-- =================================================
-             PANEL DE CREACIÓN
-             ================================================= -->
+             RESULTADO
+        ================================================= -->
 
-        <aside class="generador-video-panel">
-
-
-            <div class="generador-video-panel-titulo">
-
-                <strong>
-                    Crear vídeo
-                </strong>
-
-                <small>
-                    Describe exactamente lo que quieres ver.
-                </small>
-
-            </div>
-
-
-            <!-- PROMPT -->
-
-            <label
-                for="video-prompt"
-                class="generador-video-label"
-            >
-                Descripción
-            </label>
-
-
-            <textarea
-                id="video-prompt"
-                class="generador-video-prompt"
-                placeholder="Ejemplo: Un tren atraviesa una ciudad nevada durante la noche. Hay luces cálidas en las ventanas, nieve cayendo y la cámara sigue al tren desde el aire..."
-            ></textarea>
-
-
-            <div class="generador-video-contador">
-                <span id="video-prompt-contador">
-                    0
-                </span>
-                / 2000
-            </div>
-
-
-
-            <!-- TIPO DE VÍDEO -->
-
-            <div class="generador-video-seccion">
-
-                <span class="generador-video-label">
-                    Tipo de vídeo
-                </span>
-
-
-                <div class="generador-video-opciones">
-
-                    <button
-                        type="button"
-                        class="generador-video-opcion activo"
-                        data-video-tipo="cinematico"
-                        onclick="seleccionarTipoVideo('cinematico', this)"
-                    >
-                        <span>🎬</span>
-                        <div>
-                            <strong>Cinemático</strong>
-                            <small>Estilo película</small>
-                        </div>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="generador-video-opcion"
-                        data-video-tipo="animacion"
-                        onclick="seleccionarTipoVideo('animacion', this)"
-                    >
-                        <span>✨</span>
-                        <div>
-                            <strong>Animación</strong>
-                            <small>Animación 3D</small>
-                        </div>
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- DURACIÓN -->
-
-            <div class="generador-video-seccion">
-
-                <label
-                    for="video-duracion"
-                    class="generador-video-label"
-                >
-                    Duración
-                </label>
-
-
-                <select
-                    id="video-duracion"
-                    class="generador-video-select"
-                >
-
-                    <option value="5">
-                        5 segundos
-                    </option>
-
-                    <option value="10" selected>
-                        10 segundos
-                    </option>
-
-                    <option value="15">
-                        15 segundos
-                    </option>
-
-                    <option value="30">
-                        30 segundos
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <!-- FORMATO -->
-
-            <div class="generador-video-seccion">
-
-                <span class="generador-video-label">
-                    Formato
-                </span>
-
-
-                <div class="generador-video-formatos">
-
-                    <button
-                        type="button"
-                        class="generador-video-formato activo"
-                        onclick="seleccionarFormatoVideo('16:9', this)"
-                    >
-                        <strong>16:9</strong>
-                        <small>Horizontal</small>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="generador-video-formato"
-                        onclick="seleccionarFormatoVideo('9:16', this)"
-                    >
-                        <strong>9:16</strong>
-                        <small>Vertical</small>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="generador-video-formato"
-                        onclick="seleccionarFormatoVideo('1:1', this)"
-                    >
-                        <strong>1:1</strong>
-                        <small>Cuadrado</small>
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CALIDAD -->
-
-            <div class="generador-video-seccion">
-
-                <label
-                    for="video-calidad"
-                    class="generador-video-label"
-                >
-                    Calidad
-                </label>
-
-
-                <select
-                    id="video-calidad"
-                    class="generador-video-select"
-                >
-
-                    <option value="720p">
-                        HD · 720p
-                    </option>
-
-                    <option value="1080p" selected>
-                        Full HD · 1080p
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <!-- BOTÓN -->
-
-            <button
-                type="button"
-                class="generador-video-generar"
-                onclick="generarVideo3D()"
-            >
-
-                <span>
-                    ✨
-                </span>
-
-                Generar vídeo
-
-            </button>
-
-
-        </aside>
-
-
-
-        <!-- =================================================
-             ÁREA DE PREVISUALIZACIÓN
-             ================================================= -->
-
-        <main class="generador-video-preview">
-
-
-            <div class="generador-video-preview-header">
-
-                <div>
-
-                    <span>
-                        PREVISUALIZACIÓN
-                    </span>
-
-                    <h2 id="video-escena-titulo">
-                        Tu vídeo aparecerá aquí
-                    </h2>
-
-                </div>
-
-
-                <div class="generador-video-preview-controles">
-
-                    <button
-                        type="button"
-                        onclick="reproducirVideoPreview()"
-                        aria-label="Reproducir"
-                    >
-                        ▶
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="reiniciarVideoPreview()"
-                        aria-label="Reiniciar"
-                    >
-                        ↻
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="pantallaCompletaVideo()"
-                        aria-label="Pantalla completa"
-                    >
-                        ⛶
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- VISOR -->
-
-            <div
-                id="video-preview"
-                class="generador-video-preview-visor"
-            >
-
-
-                <div class="generador-video-preview-vacio">
-
-                    <div class="generador-video-play-grande">
-                        ▶
-                    </div>
-
-
-                    <h3>
-                        Crea tu primera escena
-                    </h3>
-
-
-                    <p>
-                        Describe una escena y StudyAI preparará tu vídeo 3D.
-                    </p>
-
-                </div>
-
-
-                <!-- CAPA DE CARGA -->
-
-                <div
-                    id="video-generando"
-                    class="generador-video-generando oculto"
-                >
-
-                    <div class="generador-video-spinner"></div>
-
-
-                    <strong>
-                        Construyendo tu vídeo...
-                    </strong>
-
-
-                    <span id="video-generando-texto">
-                        Preparando escena 3D
-                    </span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- BARRA INFERIOR -->
-
-            <div class="generador-video-timeline">
-
-
-                <div class="generador-video-tiempo">
-
-                    <span id="video-tiempo-actual">
-                        00:00
-                    </span>
-
-                    <span>
-                        /
-                    </span>
-
-                    <span id="video-tiempo-total">
-                        00:10
-                    </span>
-
-                </div>
-
-
-                <input
-                    type="range"
-                    id="video-timeline"
-                    min="0"
-                    max="10"
-                    value="0"
-                    step="0.1"
-                >
-
-
-                <button
-                    type="button"
-                    class="generador-video-descargar"
-                    onclick="descargarVideoGenerado()"
-                >
-                    ↓ Exportar
-                </button>
-
-            </div>
-
-        </main>
-
-    </div>
-
-
-
-    <!-- =================================================
-         IDEAS
-         ================================================= -->
-
-    <div class="generador-video-ideas">
-
-        <div>
-
-            <span>
-                IDEAS PARA EMPEZAR
-            </span>
+        <section class="card">
 
             <h2>
-                ¿Qué quieres crear?
+                Resultado
             </h2>
 
-        </div>
 
+            <div id="resultado">
 
-        <button
-            type="button"
-            onclick="usarPromptVideo('Una ciudad futurista de noche con enormes rascacielos, coches voladores y luces de neón mientras la cámara sobrevuela la ciudad.')"
-        >
-            🌃 Ciudad futurista
-        </button>
+                <div class="studyai-empty">
 
-
-        <button
-            type="button"
-            onclick="usarPromptVideo('Un tren antiguo atraviesa un paisaje nevado al atardecer, con nieve cayendo y una cámara cinematográfica siguiéndolo desde las vías.')"
-        >
-            🚂 Tren nevado
-        </button>
-
-
-        <button
-            type="button"
-            onclick="usarPromptVideo('Un astronauta camina sobre Marte mientras el sol aparece detrás de una enorme montaña y la cámara se aleja lentamente.')"
-        >
-            🚀 Marte
-        </button>
-
-
-        <button
-            type="button"
-            onclick="usarPromptVideo('Una habitación de estudiante durante una noche de tormenta, con un ordenador encendido y gotas de lluvia golpeando la ventana.')"
-        >
-            🖥️ Habitación
-        </button>
-
-    </div>
-
-</section>
-
-        <!-- =====================================================
-             CONTENIDO PRINCIPAL
-             ===================================================== -->
-
-        <main>
-
-
-            <!-- =================================================
-                 PERFIL
-                 ================================================= -->
-
-            <section
-                id="perfil-panel"
-                class="perfil-panel oculto"
-            >
-
-
-                <div class="perfil-card">
-
-
-                    <button
-                        type="button"
-                        class="perfil-cerrar"
-                        onclick="cerrarPerfil()"
-                    >
-                        ✕
-                    </button>
-
-
-                    <div class="perfil-grande">
-
-                        <img
-                            id="perfil-foto-grande"
-                            src="/images/logo.png"
-                            alt="Foto de perfil"
-                        >
-
+                    <div class="studyai-empty-icon">
+                        ✨
                     </div>
 
+                    <h3>
+                        Listo para estudiar
+                    </h3>
 
-                    <h2 id="perfil-nombre-grande">
-                        Mi perfil
-                    </h2>
-
-
-                    <p id="perfil-email"></p>
-
-
-                    <div class="perfil-datos">
-
-
-                        <label for="perfil-username">
-                            Nombre de usuario
-                        </label>
-
-
-                        <input
-                            id="perfil-username"
-                            type="text"
-                            readonly
-                        >
-
-
-                        <label for="perfil-biografia">
-                            Biografía
-                        </label>
-
-
-                        <textarea
-                            id="perfil-biografia"
-                            readonly
-                        ></textarea>
-
-
-                        <label for="perfil-curso">
-                            Curso
-                        </label>
-
-
-                        <input
-                            id="perfil-curso"
-                            type="text"
-                            readonly
-                        >
-
-
-                        <label for="perfil-asignaturas">
-                            Asignaturas
-                        </label>
-
-
-                        <input
-                            id="perfil-asignaturas"
-                            type="text"
-                            readonly
-                        >
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="btn-guardar-perfil"
-                        onclick="editarPerfil()"
-                    >
-                        ✏️ Editar perfil
-                    </button>
-
-
-                    <a
-                        href="/auth/logout"
-                        class="btn-cerrar-sesion"
-                    >
-                        🚪 Cerrar sesión
-                    </a>
-
+                    <p>
+                        Pega tus apuntes y genera contenido con StudyAI.
+                    </p>
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
 
-            <!-- =================================================
-                 GENERADOR
-                 ================================================= -->
+        <!-- =================================================
+             SESIONES
+        ================================================= -->
 
-            <section class="card">
+        <section class="card">
 
-
-                <h2>
-                    📚 Tus apuntes
-                </h2>
-
-
-                <textarea
-                    id="apuntes"
-                    placeholder="Pega aquí tus apuntes..."
-                ></textarea>
+            <h2>
+                Mis sesiones
+            </h2>
 
 
-
-                <!-- ARCHIVOS -->
-
-                <div class="archivos-studyai">
-
-
-                    <div class="archivos-studyai-cabecera">
-
-                        <div>
-
-                            <strong>
-                                📎 Adjunta tus apuntes
-                            </strong>
-
-
-                            <span>
-                                PDF, TXT, JPG, PNG o WEBP · máximo 5 archivos
-                            </span>
-
-                        </div>
-
-
-                        <span
-                            class="archivos-contador"
-                            id="archivos-contador"
-                        >
-                            0/5
-                        </span>
-
-                    </div>
-
-
-                    <input
-                        type="file"
-                        id="archivos-input"
-                        multiple
-                        accept="image/png,image/jpeg,image/webp,application/pdf,text/plain,.txt"
-                        hidden
-                        onchange="seleccionarArchivos(event)"
-                    >
-
-
-                    <button
-                        type="button"
-                        class="btn-adjuntar"
-                        onclick="document.getElementById('archivos-input').click()"
-                    >
-
-                        <span>
-                            📎
-                        </span>
-
-
-                        <span>
-                            Seleccionar archivos
-                        </span>
-
-                    </button>
-
-
-                    <div
-                        id="archivos-seleccionados"
-                        class="archivos-seleccionados"
-                    ></div>
-
-                </div>
-
-
-
-                <!-- MODOS -->
-
-                <div class="modos">
-
-
-                    <button
-                        type="button"
-                        class="modo"
-                        onclick="seleccionarModo('examen', this)"
-                    >
-                        🎯 Examen
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="modo activo"
-                        onclick="seleccionarModo('preguntas', this)"
-                    >
-                        ❓ Preguntas
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="modo"
-                        onclick="seleccionarModo('resumen', this)"
-                    >
-                        📚 Resumen
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="modo"
-                        onclick="seleccionarModo('flashcards', this)"
-                    >
-                        🧠 Flashcards
-                    </button>
-
-
-                </div>
-
+            <div class="sesiones-controles">
 
                 <input
-                    type="hidden"
-                    id="tipo"
-                    value="preguntas"
+                    type="search"
+                    id="buscar-sesiones"
+                    placeholder="Buscar sesiones..."
+                    autocomplete="off"
                 >
 
 
+                <select id="filtro-sesiones">
 
-                <!-- ACCIONES -->
+                    <option value="todas">
+                        Todas
+                    </option>
 
-                <div class="acciones-studyai">
+                    <option value="resumen">
+                        Resúmenes
+                    </option>
 
+                    <option value="preguntas">
+                        Preguntas
+                    </option>
 
-                    <button
-                        type="button"
-                        onclick="generar()"
-                        class="btn-generar"
-                    >
+                    <option value="flashcards">
+                        Flashcards
+                    </option>
 
-                        <span>
-                            ✨
-                        </span>
+                    <option value="examen">
+                        Exámenes
+                    </option>
 
+                </select>
 
-                        <span>
-                            Generar
-                        </span>
+            </div>
 
-                    </button>
 
+            <div id="sesiones">
+                Todavía no tienes sesiones guardadas.
+            </div>
 
-                    <button
-                        type="button"
-                        onclick="guardarSesion()"
-                        class="btn-guardar"
-                    >
+        </section>
 
-                        <span>
-                            💾
-                        </span>
+    </main>
 
+</div>
 
-                        <span>
-                            Guardar sesión
-                        </span>
 
-                    </button>
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-                    <button
-                        type="button"
-                        onclick="nuevaSesion()"
-                        class="btn-nueva"
-                    >
-
-                        <span>
-                            ↻
-                        </span>
-
-
-                        <span>
-                            Nueva sesión
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-
-
-                <!-- MODO ESTUDIO -->
-
-                <button
-                    type="button"
-                    onclick="abrirModoEstudio()"
-                    class="btn-modo-estudio"
-                >
-
-                    <span>
-                        🧠
-                    </span>
-
-
-                    <span>
-                        Modo Estudio
-                    </span>
-
-                </button>
-
-
-            </section>
-
-
-
-            <!-- =================================================
-                 RESULTADO
-                 ================================================= -->
-
-            <section class="card">
-
-
-                <h2>
-                    ✨ Resultado
-                </h2>
-
-
-                <div id="resultado">
-
-
-                    <div class="studyai-empty">
-
-
-                        <div class="studyai-empty-icon">
-                            ✨
-                        </div>
-
-
-                        <h3>
-                            Listo para estudiar
-                        </h3>
-
-
-                        <p>
-                            Pega tus apuntes y genera contenido con StudyAI.
-                        </p>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- =================================================
-                 SESIONES
-                 ================================================= -->
-
-            <section class="card">
-
-
-                <h2>
-                    💾 Mis sesiones
-                </h2>
-
-
-                <div class="sesiones-controles">
-
-
-                    <input
-                        type="search"
-                        id="buscar-sesiones"
-                        placeholder="🔎 Buscar sesiones..."
-                        autocomplete="off"
-                    >
-
-
-                    <select id="filtro-sesiones">
-
-
-                        <option value="todas">
-                            Todas
-                        </option>
-
-
-                        <option value="resumen">
-                            Resúmenes
-                        </option>
-
-
-                        <option value="preguntas">
-                            Preguntas
-                        </option>
-
-
-                        <option value="flashcards">
-                            Flashcards
-                        </option>
-
-
-                        <option value="examen">
-                            Exámenes
-                        </option>
-
-
-                    </select>
-
-
-                </div>
-
-
-                <div id="sesiones">
-                    Todavía no tienes sesiones guardadas.
-                </div>
-
-
-            </section>
-
-
-        </main>
-
-
-    </div>
-
-
-
-    <!-- =========================================================
-         JAVASCRIPT
-         ========================================================= -->
-
-    <script src="/script.js"></script>
-
+<script src="/script.js"></script>
 
 </body>
-
 </html>
-```
